@@ -1,0 +1,120 @@
+name: Fixer FinOps Profile
+description: |
+  Mapping of the Fixer commercial surface to the FinOps Framework and the FOCUS
+  cost/usage data specification. Covers billing model, charge categories, unit
+  economics, allocation tags, and recommended optimization plays.
+url: https://raw.githubusercontent.com/api-evangelist/fixer/main/finops/fixer-finops.yml
+created: '2026-05-29'
+modified: '2026-05-29'
+specificationVersion: '0.1'
+provider: fixer
+parent: apilayer
+billedThrough: APILayer Marketplace
+
+billingModel:
+  type: subscription-plus-overage
+  cycle: monthly
+  annualOption: true
+  annualDiscountNotes: ~15% effective discount when billing annually.
+
+chargeCategories:
+  - category: Subscription
+    description: Recurring monthly plan fee covering the bundled request quota.
+    skus:
+      - id: plan.free
+        name: Free Plan
+        unitPrice: 0
+        unit: month
+      - id: plan.basic
+        name: Basic Plan
+        unitPrice: 14.99
+        unit: month
+      - id: plan.professional
+        name: Professional Plan
+        unitPrice: 59.99
+        unit: month
+      - id: plan.professional-plus
+        name: Professional Plus Plan
+        unitPrice: 99.99
+        unit: month
+      - id: plan.enterprise
+        name: Enterprise Plan
+        unitPrice: null
+        unit: month
+        notes: Custom annual contract.
+
+  - category: Usage
+    description: Per-request overage charges once a plan's monthly quota is exceeded.
+    skus:
+      - id: overage.basic
+        name: Basic Overage
+        unitPrice: 0.005996
+        unit: request
+      - id: overage.professional
+        name: Professional Overage
+        unitPrice: 0.0023996
+        unit: request
+      - id: overage.professional-plus
+        name: Professional Plus Overage
+        unitPrice: 0.00079992
+        unit: request
+      - id: overage.enterprise
+        name: Enterprise Overage
+        unitPrice: negotiated
+        unit: request
+
+focusMapping:
+  ServiceName: Fixer
+  ProviderName: APILayer
+  PublisherName: APILayer
+  ServiceCategory: Integration Services
+  ChargeCategory:
+    Subscription: Subscription
+    Usage: Usage
+  PricingUnit: request
+  PricingCurrency: USD
+  BillingCurrency: USD
+  ChargeFrequency:
+    Subscription: Recurring
+    Usage: Usage
+
+allocationTags:
+  recommended:
+    - tag: cost-center
+      description: Internal cost center consuming Fixer rates.
+    - tag: product
+      description: Downstream product (checkout, treasury, analytics) that called Fixer.
+    - tag: environment
+      description: dev / staging / prod separation for API keys.
+    - tag: customer
+      description: If reselling FX data, tag charges back to end customers.
+  derivedFromApiKey: true
+  notes: |
+    APILayer issues one API key per subscription. Provision distinct keys per
+    environment and per product line so usage can be reconciled against
+    allocation tags downstream.
+
+optimizationPlays:
+  - id: cache-symbols
+    description: Cache /symbols responses for 24h+; the symbol list rarely changes.
+    estimatedSavings: high
+  - id: cache-historical
+    description: Cache historical /{date} responses indefinitely; end-of-day rates are immutable.
+    estimatedSavings: high
+  - id: right-size-cadence
+    description: Match plan freshness (hourly / 10-min / 60-sec) to actual downstream needs.
+    estimatedSavings: medium
+  - id: batch-symbols-filter
+    description: Use `symbols=` to restrict to currencies you actually consume.
+    estimatedSavings: low
+  - id: prefer-annual-billing
+    description: Switch to annual billing for ~15% effective discount once usage is steady.
+    estimatedSavings: medium
+  - id: monitor-overage
+    description: Alert on 80% of monthly quota to avoid surprise overage charges.
+    estimatedSavings: medium
+
+reportingCadence:
+  invoice: monthly
+  usageVisibility: APILayer dashboard (real-time)
+  exportFormats: [CSV, PDF]

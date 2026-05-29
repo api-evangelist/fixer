@@ -1,0 +1,103 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "fx": "https://api-evangelist.github.io/fixer/vocab#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "success": "fx:success",
+    "timestamp": {
+      "@id": "fx:timestamp",
+      "@type": "xsd:long"
+    },
+    "historical": {
+      "@id": "fx:historical",
+      "@type": "xsd:boolean"
+    },
+    "base": {
+      "@id": "fx:baseCurrency",
+      "@type": "fx:CurrencyCode"
+    },
+    "date": {
+      "@id": "fx:rateDate",
+      "@type": "xsd:date"
+    },
+    "start_date": {
+      "@id": "fx:startDate",
+      "@type": "xsd:date"
+    },
+    "end_date": {
+      "@id": "fx:endDate",
+      "@type": "xsd:date"
+    },
+    "timeseries": "fx:timeSeries",
+    "fluctuation": "fx:fluctuation",
+
+    "rates": {
+      "@id": "fx:rates",
+      "@container": "@index"
+    },
+    "symbols": {
+      "@id": "fx:symbols",
+      "@container": "@index"
+    },
+
+    "query": "fx:conversionQuery",
+    "info": "fx:conversionInfo",
+    "result": {
+      "@id": "fx:conversionResult",
+      "@type": "xsd:double"
+    },
+    "rate": {
+      "@id": "fx:exchangeRate",
+      "@type": "xsd:double"
+    },
+    "amount": {
+      "@id": "fx:amount",
+      "@type": "xsd:double"
+    },
+    "from": {
+      "@id": "fx:sourceCurrency",
+      "@type": "fx:CurrencyCode"
+    },
+    "to": {
+      "@id": "fx:targetCurrency",
+      "@type": "fx:CurrencyCode"
+    },
+
+    "start_rate": {
+      "@id": "fx:startRate",
+      "@type": "xsd:double"
+    },
+    "end_rate": {
+      "@id": "fx:endRate",
+      "@type": "xsd:double"
+    },
+    "change": {
+      "@id": "fx:change",
+      "@type": "xsd:double"
+    },
+    "change_pct": {
+      "@id": "fx:changePercent",
+      "@type": "xsd:double"
+    },
+
+    "error": "fx:error",
+    "code": {
+      "@id": "fx:errorCode",
+      "@type": "xsd:integer"
+    },
+    "type": "fx:errorType",
+    "info_text": {
+      "@id": "fx:errorInfo",
+      "@type": "xsd:string"
+    },
+
+    "provider": "schema:provider",
+    "source": "schema:Organization",
+    "ecb": {
+      "@id": "fx:europeanCentralBank",
+      "@type": "@id"
+    }
+  }
+}

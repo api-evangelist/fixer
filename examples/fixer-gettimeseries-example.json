@@ -1,0 +1,36 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.apilayer.com/fixer/timeseries?start_date=2012-05-01&end_date=2012-05-03&base=EUR&symbols=USD,AUD,CAD",
+    "headers": {
+      "apikey": "YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "timeseries": true,
+      "start_date": "2012-05-01",
+      "end_date": "2012-05-03",
+      "base": "EUR",
+      "rates": {
+        "2012-05-01": {
+          "USD": 1.322891,
+          "AUD": 1.278047,
+          "CAD": 1.302303
+        },
+        "2012-05-02": {
+          "USD": 1.315066,
+          "AUD": 1.274202,
+          "CAD": 1.299083
+        },
+        "2012-05-03": {
+          "USD": 1.314491,
+          "AUD": 1.280135,
+          "CAD": 1.296868
+        }
+      }
+    }
+  }
+}

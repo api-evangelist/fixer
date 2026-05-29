@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/fixer/json-schema/fixer-symbols-schema.json",
+  "title": "Fixer Symbols Response",
+  "description": "Envelope returned by /symbols listing every supported currency code and its full name.",
+  "type": "object",
+  "required": ["success", "symbols"],
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "symbols": {
+      "type": "object",
+      "description": "Map of ISO 4217 currency code to currency name.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

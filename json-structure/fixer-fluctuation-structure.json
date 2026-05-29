@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/draft-00/schema",
+  "name": "FixerFluctuationResponse",
+  "description": "JSON Structure for a Fixer fluctuation envelope (rate change summary per currency).",
+  "type": "object",
+  "properties": {
+    "success": { "type": "boolean" },
+    "fluctuation": { "type": "boolean" },
+    "start_date": { "type": "string", "x-format": "date" },
+    "end_date": { "type": "string", "x-format": "date" },
+    "base": { "type": "string", "x-format": "iso4217" },
+    "rates": {
+      "type": "map",
+      "values": {
+        "type": "object",
+        "properties": {
+          "start_rate": { "type": "double" },
+          "end_rate": { "type": "double" },
+          "change": { "type": "double" },
+          "change_pct": { "type": "double" }
+        },
+        "required": ["start_rate", "end_rate", "change", "change_pct"]
+      }
+    }
+  },
+  "required": ["success", "fluctuation", "start_date", "end_date", "base", "rates"]
+}

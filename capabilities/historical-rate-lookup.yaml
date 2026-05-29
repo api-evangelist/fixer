@@ -1,0 +1,35 @@
+apiVersion: capability.naftiko.dev/v1alpha1
+kind: Capability
+metadata:
+  name: historical-rate-lookup
+  provider: fixer
+  description: |
+    Look up the end-of-day exchange rate for a specific historical date and
+    currency pair. Useful for ledger reconciliation, audit trails, and
+    point-in-time valuation.
+spec:
+  uses:
+    - sharedCapability: fixer-shared
+      operations: [getHistorical, getSymbols]
+  preconditions:
+    - description: Date must be on or after 1999-01-04 (the earliest day Fixer covers).
+  workflow:
+    - step: validateSymbol
+      operation: getSymbols
+    - step: fetchHistorical
+      operation: getHistorical
+      parameters:
+        date: "{{ input.date }}"
+        base: "{{ input.base | default: 'EUR' }}"
+        symbols: "{{ input.symbols }}"
+  outputs:
+    date: "{{ fetchHistorical.date }}"
+    base: "{{ fetchHistorical.base }}"
+    rates: "{{ fetchHistorical.rates }}"
+    timestamp: "{{ fetchHistorical.timestamp }}"
+  governance:
+    minPlan: Free
+    httpsRequired: false
+    notes: |
+      Historical lookup is available on all tiers including Free, but Free is HTTP-only
+      and locked to EUR base. Use Basic or above for HTTPS and arbitrary base currency.

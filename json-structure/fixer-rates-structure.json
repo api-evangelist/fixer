@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-structure.org/draft-00/schema",
+  "name": "FixerRatesResponse",
+  "description": "JSON Structure for a Fixer real-time or historical rates envelope.",
+  "type": "object",
+  "properties": {
+    "success": { "type": "boolean" },
+    "timestamp": { "type": "int64" },
+    "historical": { "type": "boolean" },
+    "base": { "type": "string", "x-format": "iso4217" },
+    "date": { "type": "string", "x-format": "date" },
+    "rates": {
+      "type": "map",
+      "values": { "type": "double" }
+    }
+  },
+  "required": ["success", "timestamp", "base", "date", "rates"]
+}

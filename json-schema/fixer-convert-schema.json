@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/fixer/json-schema/fixer-convert-schema.json",
+  "title": "Fixer Convert Response",
+  "description": "Envelope returned by /convert with the requested conversion result and supporting rate metadata.",
+  "type": "object",
+  "required": ["success", "query", "info", "result"],
+  "properties": {
+    "success": { "type": "boolean" },
+    "query": {
+      "type": "object",
+      "required": ["from", "to", "amount"],
+      "properties": {
+        "from": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "to": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "amount": { "type": "number" }
+      }
+    },
+    "info": {
+      "type": "object",
+      "required": ["timestamp", "rate"],
+      "properties": {
+        "timestamp": { "type": "integer" },
+        "rate": { "type": "number" }
+      }
+    },
+    "historical": { "type": "boolean" },
+    "date": { "type": "string", "format": "date" },
+    "result": { "type": "number" }
+  }
+}

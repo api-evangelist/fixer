@@ -1,0 +1,508 @@
+openapi: 3.0.3
+info:
+  title: Fixer API
+  description: |
+    Fixer is a lightweight JSON API for real-time and historical foreign exchange
+    rates and currency conversion. Sourced primarily from the European Central Bank
+    and 15+ other exchange rate data providers, Fixer supports 170+ world currencies.
+
+    The API is delivered via the APILayer marketplace. All requests authenticate via
+    an `apikey` HTTP header. The free tier is limited to 100 requests per month and
+    is HTTP-only; HTTPS encryption and source-currency switching become available on
+    the Basic plan and above.
+  version: "1.0.0"
+  contact:
+    name: Fixer Support
+    url: https://fixer.io/contact
+  license:
+    name: Commercial
+    url: https://fixer.io/terms
+  termsOfService: https://fixer.io/terms
+  x-provider: fixer
+  x-parent: apilayer
+servers:
+  - url: https://api.apilayer.com/fixer
+    description: APILayer-hosted production endpoint (current)
+  - url: http://data.fixer.io/api
+    description: Legacy data.fixer.io endpoint (HTTP, free tier)
+  - url: https://data.fixer.io/api
+    description: Legacy data.fixer.io endpoint (HTTPS, paid tiers)
+tags:
+  - name: Rates
+    description: Real-time and historical foreign exchange rate operations.
+  - name: Symbols
+    description: Discovery of supported currency symbols.
+  - name: Conversion
+    description: On-demand currency amount conversion.
+  - name: Time Series
+    description: Daily historical rates between two dates.
+  - name: Fluctuation
+    description: Currency fluctuation analysis between two dates.
+security:
+  - ApiKeyAuth: []
+paths:
+  /symbols:
+    get:
+      operationId: getSymbols
+      summary: List Supported Currency Symbols
+      description: Returns all currency symbols Fixer supports along with their full names.
+      tags:
+        - Symbols
+      responses:
+        "200":
+          description: A map of currency codes to currency names.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SymbolsResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+  /latest:
+    get:
+      operationId: getLatest
+      summary: Get Latest Exchange Rates
+      description: |
+        Returns the most recent exchange rate data. Rates update hourly on the Free and
+        Basic tiers, every 10 minutes on Professional, and every 60 seconds on
+        Professional Plus and Enterprise.
+      tags:
+        - Rates
+      parameters:
+        - $ref: "#/components/parameters/Base"
+        - $ref: "#/components/parameters/Symbols"
+      responses:
+        "200":
+          description: Latest rates anchored to the requested base currency.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RatesResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+  /{date}:
+    get:
+      operationId: getHistorical
+      summary: Get Historical Exchange Rates
+      description: |
+        Returns end-of-day historical exchange rates for any date since 1999. Historical
+        data is available on all plans, including Free.
+      tags:
+        - Rates
+      parameters:
+        - name: date
+          in: path
+          required: true
+          description: ISO-8601 date in `YYYY-MM-DD` format (any working day since 1999-01-04).
+          schema:
+            type: string
+            format: date
+            example: "2013-12-24"
+        - $ref: "#/components/parameters/Base"
+        - $ref: "#/components/parameters/Symbols"
+      responses:
+        "200":
+          description: Historical end-of-day rates for the requested date.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RatesResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+  /convert:
+    get:
+      operationId: convertCurrency
+      summary: Convert Currency Amount
+      description: |
+        Converts an amount from one currency to another using real-time or historical
+        rates. Available on Basic plan and above.
+      tags:
+        - Conversion
+      parameters:
+        - name: from
+          in: query
+          required: true
+          description: Three-letter source currency code (ISO 4217).
+          schema:
+            type: string
+            example: GBP
+        - name: to
+          in: query
+          required: true
+          description: Three-letter target currency code (ISO 4217).
+          schema:
+            type: string
+            example: JPY
+        - name: amount
+          in: query
+          required: true
+          description: Amount to convert.
+          schema:
+            type: number
+            example: 25
+        - name: date
+          in: query
+          required: false
+          description: Optional historical date (YYYY-MM-DD) to use for the conversion rate.
+          schema:
+            type: string
+            format: date
+            example: "2018-02-22"
+      responses:
+        "200":
+          description: Converted amount and conversion metadata.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConvertResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+  /timeseries:
+    get:
+      operationId: getTimeSeries
+      summary: Get Time Series Exchange Rates
+      description: |
+        Returns daily historical exchange rates between two dates of your choice,
+        with a maximum range of 365 days. Available on Professional plan and above.
+      tags:
+        - Time Series
+      parameters:
+        - name: start_date
+          in: query
+          required: true
+          description: Start date for the time series window (YYYY-MM-DD).
+          schema:
+            type: string
+            format: date
+            example: "2012-05-01"
+        - name: end_date
+          in: query
+          required: true
+          description: End date for the time series window (YYYY-MM-DD).
+          schema:
+            type: string
+            format: date
+            example: "2012-05-25"
+        - $ref: "#/components/parameters/Base"
+        - $ref: "#/components/parameters/Symbols"
+      responses:
+        "200":
+          description: Map of dates to daily rates for the requested window.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeSeriesResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+  /fluctuation:
+    get:
+      operationId: getFluctuation
+      summary: Get Fluctuation Data
+      description: |
+        Returns fluctuation data (start rate, end rate, change, change_pct) between two
+        dates for any supported currency pair. Available on Professional Plus and above.
+      tags:
+        - Fluctuation
+      parameters:
+        - name: start_date
+          in: query
+          required: true
+          description: Start date for the fluctuation window (YYYY-MM-DD).
+          schema:
+            type: string
+            format: date
+            example: "2018-02-25"
+        - name: end_date
+          in: query
+          required: true
+          description: End date for the fluctuation window (YYYY-MM-DD).
+          schema:
+            type: string
+            format: date
+            example: "2018-02-26"
+        - $ref: "#/components/parameters/Base"
+        - $ref: "#/components/parameters/Symbols"
+      responses:
+        "200":
+          description: Per-currency fluctuation summary for the requested window.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluctuationResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apikey
+      description: APILayer API key provisioned at https://apilayer.com/marketplace/fixer-api.
+  parameters:
+    Base:
+      name: base
+      in: query
+      required: false
+      description: |
+        Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;
+        any base currency may be selected on Basic plan and above.
+      schema:
+        type: string
+        example: USD
+    Symbols:
+      name: symbols
+      in: query
+      required: false
+      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
+      schema:
+        type: string
+        example: USD,AUD,CAD,PLN,MXN
+  responses:
+    Unauthorized:
+      description: Missing or invalid `apikey` header.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    Forbidden:
+      description: The requested feature is not included in the current subscription plan.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    RateLimited:
+      description: Monthly request quota exhausted or per-minute rate limit hit.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+  schemas:
+    SymbolsResponse:
+      type: object
+      required:
+        - success
+        - symbols
+      properties:
+        success:
+          type: boolean
+          example: true
+        symbols:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            AED: United Arab Emirates Dirham
+            AFN: Afghan Afghani
+            ALL: Albanian Lek
+    RatesResponse:
+      type: object
+      required:
+        - success
+        - timestamp
+        - base
+        - date
+        - rates
+      properties:
+        success:
+          type: boolean
+          example: true
+        timestamp:
+          type: integer
+          format: int64
+          example: 1519296206
+        base:
+          type: string
+          example: EUR
+        date:
+          type: string
+          format: date
+          example: "2018-02-22"
+        historical:
+          type: boolean
+          example: false
+        rates:
+          type: object
+          additionalProperties:
+            type: number
+          example:
+            USD: 1.23396
+            AUD: 1.566015
+            CAD: 1.560132
+    ConvertResponse:
+      type: object
+      required:
+        - success
+        - query
+        - info
+        - result
+      properties:
+        success:
+          type: boolean
+          example: true
+        query:
+          type: object
+          properties:
+            from:
+              type: string
+              example: GBP
+            to:
+              type: string
+              example: JPY
+            amount:
+              type: number
+              example: 25
+        info:
+          type: object
+          properties:
+            timestamp:
+              type: integer
+              format: int64
+              example: 1519328414
+            rate:
+              type: number
+              example: 148.972231
+        historical:
+          type: boolean
+          example: false
+        date:
+          type: string
+          format: date
+          example: "2018-02-22"
+        result:
+          type: number
+          example: 3724.305775
+    TimeSeriesResponse:
+      type: object
+      required:
+        - success
+        - timeseries
+        - start_date
+        - end_date
+        - base
+        - rates
+      properties:
+        success:
+          type: boolean
+          example: true
+        timeseries:
+          type: boolean
+          example: true
+        start_date:
+          type: string
+          format: date
+          example: "2012-05-01"
+        end_date:
+          type: string
+          format: date
+          example: "2012-05-03"
+        base:
+          type: string
+          example: EUR
+        rates:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: number
+          example:
+            "2012-05-01":
+              USD: 1.322891
+              AUD: 1.278047
+              CAD: 1.302303
+            "2012-05-02":
+              USD: 1.315066
+              AUD: 1.274202
+              CAD: 1.299083
+    FluctuationResponse:
+      type: object
+      required:
+        - success
+        - fluctuation
+        - start_date
+        - end_date
+        - base
+        - rates
+      properties:
+        success:
+          type: boolean
+          example: true
+        fluctuation:
+          type: boolean
+          example: true
+        start_date:
+          type: string
+          format: date
+          example: "2018-02-25"
+        end_date:
+          type: string
+          format: date
+          example: "2018-02-26"
+        base:
+          type: string
+          example: EUR
+        rates:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/FluctuationEntry"
+          example:
+            USD:
+              start_rate: 1.228952
+              end_rate: 1.232735
+              change: 0.0038
+              change_pct: 0.3078
+            JPY:
+              start_rate: 131.587611
+              end_rate: 131.651142
+              change: 0.0635
+              change_pct: 0.0483
+    FluctuationEntry:
+      type: object
+      properties:
+        start_rate:
+          type: number
+        end_rate:
+          type: number
+        change:
+          type: number
+        change_pct:
+          type: number
+    ErrorResponse:
+      type: object
+      required:
+        - success
+        - error
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              example: 104
+            type:
+              type: string
+              example: monthly_limit_reached
+            info:
+              type: string
+              example: Your monthly API request volume has been reached. Please upgrade your plan.

@@ -1,0 +1,133 @@
+name: Fixer Vocabulary
+description: |
+  Controlled vocabulary for the Fixer foreign exchange rate API. Terms unify the
+  operational dimensions (resources, endpoints, parameters, plans) with the
+  capability dimensions exposed downstream (rate lookup, conversion, time-series
+  analysis, fluctuation reporting).
+url: https://raw.githubusercontent.com/api-evangelist/fixer/main/vocabulary/fixer-vocabulary.yml
+created: '2026-05-29'
+modified: '2026-05-29'
+specificationVersion: '0.1'
+provider: fixer
+domain: Currency Exchange
+
+dimensions:
+  resources:
+    - id: symbol
+      label: Currency Symbol
+      definition: An ISO 4217 three-letter currency code Fixer recognizes (170+ codes).
+    - id: rate
+      label: Exchange Rate
+      definition: A signed quote of one currency expressed in units of another, anchored to a base currency.
+    - id: conversion
+      label: Conversion
+      definition: An on-demand calculation translating an amount of one currency into another at a chosen rate.
+    - id: timeSeries
+      label: Time Series
+      definition: A sequence of daily end-of-day rates between two dates for a given base/symbols pair.
+    - id: fluctuation
+      label: Fluctuation
+      definition: A summarized comparison of start rate, end rate, absolute change, and percentage change between two dates.
+
+  endpoints:
+    - id: getSymbols
+      label: List Supported Currency Symbols
+      method: GET
+      path: /symbols
+    - id: getLatest
+      label: Get Latest Exchange Rates
+      method: GET
+      path: /latest
+    - id: getHistorical
+      label: Get Historical Exchange Rates
+      method: GET
+      path: /{date}
+    - id: convertCurrency
+      label: Convert Currency Amount
+      method: GET
+      path: /convert
+    - id: getTimeSeries
+      label: Get Time Series Exchange Rates
+      method: GET
+      path: /timeseries
+    - id: getFluctuation
+      label: Get Fluctuation Data
+      method: GET
+      path: /fluctuation
+
+  parameters:
+    - id: base
+      label: Base Currency
+      definition: ISO 4217 currency code anchoring the rate set. Defaults to EUR; switchable on Basic and above.
+    - id: symbols
+      label: Symbol Filter
+      definition: Comma-separated list of target currency codes that scopes the response.
+    - id: from
+      label: Source Currency
+      definition: ISO 4217 code identifying the currency being converted out of.
+    - id: to
+      label: Target Currency
+      definition: ISO 4217 code identifying the currency being converted into.
+    - id: amount
+      label: Conversion Amount
+      definition: Numeric amount of the source currency to convert.
+    - id: date
+      label: Historical Date
+      definition: ISO-8601 calendar date specifying a historical record.
+    - id: start_date
+      label: Window Start Date
+      definition: First date in a time-series or fluctuation window.
+    - id: end_date
+      label: Window End Date
+      definition: Last date in a time-series or fluctuation window.
+
+  capabilities:
+    - id: realtime-fx
+      label: Real-Time FX Lookup
+      definition: Retrieve current rates anchored to a chosen base, optionally filtered by symbol.
+    - id: historical-fx
+      label: Historical FX Lookup
+      definition: Retrieve end-of-day rates for any working day since 1999-01-04.
+    - id: currency-conversion
+      label: Currency Conversion
+      definition: Convert an amount from one currency into another at a real-time or historical rate.
+    - id: timeseries-analysis
+      label: Time Series Analysis
+      definition: Pull a window of daily rates for trend analysis or backtesting (up to 365 days).
+    - id: fluctuation-reporting
+      label: Fluctuation Reporting
+      definition: Summarize rate movement between two dates for risk monitoring and treasury reporting.
+
+  commercial:
+    - id: plan
+      label: Subscription Plan
+      values: [Free, Basic, Professional, "Professional Plus", Enterprise]
+    - id: refreshRate
+      label: Rate Refresh Cadence
+      values: [Hourly, "10-minute", "60-second"]
+    - id: httpsGating
+      label: HTTPS Encryption Gating
+      definition: HTTPS is restricted to paid plans (Basic and above); Free is HTTP only.
+    - id: sourceCurrencySwitching
+      label: Source Currency Switching
+      definition: Ability to set the `base` parameter to a non-EUR currency; gated to Basic and above.
+
+  data-sources:
+    - id: ecb
+      label: European Central Bank
+      url: https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html
+      definition: Primary reference rates published daily around 4PM CET on working days.
+    - id: multi-source
+      label: Multi-Source Aggregation
+      definition: Fixer blends 15+ exchange rate data providers to deliver 170+ supported currencies.
+
+tags:
+  - Currency Exchange
+  - Foreign Exchange
+  - FX
+  - Conversion
+  - ECB
+  - Historical Rates
+  - Time Series
+  - Fluctuation
+  - APILayer

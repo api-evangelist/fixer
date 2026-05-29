@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/draft-00/schema",
+  "name": "FixerTimeSeriesResponse",
+  "description": "JSON Structure for a Fixer time-series envelope (daily rates across a date range).",
+  "type": "object",
+  "properties": {
+    "success": { "type": "boolean" },
+    "timeseries": { "type": "boolean" },
+    "start_date": { "type": "string", "x-format": "date" },
+    "end_date": { "type": "string", "x-format": "date" },
+    "base": { "type": "string", "x-format": "iso4217" },
+    "rates": {
+      "type": "map",
+      "values": {
+        "type": "map",
+        "values": { "type": "double" }
+      }
+    }
+  },
+  "required": ["success", "timeseries", "start_date", "end_date", "base", "rates"]
+}

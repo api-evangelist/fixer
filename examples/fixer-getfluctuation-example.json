@@ -1,0 +1,39 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.apilayer.com/fixer/fluctuation?start_date=2018-02-25&end_date=2018-02-26&base=EUR&symbols=USD,JPY,GBP",
+    "headers": {
+      "apikey": "YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "fluctuation": true,
+      "start_date": "2018-02-25",
+      "end_date": "2018-02-26",
+      "base": "EUR",
+      "rates": {
+        "USD": {
+          "start_rate": 1.228952,
+          "end_rate": 1.232735,
+          "change": 0.0038,
+          "change_pct": 0.3078
+        },
+        "JPY": {
+          "start_rate": 131.587611,
+          "end_rate": 131.651142,
+          "change": 0.0635,
+          "change_pct": 0.0483
+        },
+        "GBP": {
+          "start_rate": 0.882088,
+          "end_rate": 0.881448,
+          "change": -0.0006,
+          "change_pct": -0.0726
+        }
+      }
+    }
+  }
+}

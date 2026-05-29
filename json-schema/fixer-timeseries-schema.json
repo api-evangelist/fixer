@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/fixer/json-schema/fixer-timeseries-schema.json",
+  "title": "Fixer Time Series Response",
+  "description": "Envelope returned by /timeseries containing daily exchange rates between two dates.",
+  "type": "object",
+  "required": ["success", "timeseries", "start_date", "end_date", "base", "rates"],
+  "properties": {
+    "success": { "type": "boolean" },
+    "timeseries": { "type": "boolean" },
+    "start_date": { "type": "string", "format": "date" },
+    "end_date": { "type": "string", "format": "date" },
+    "base": { "type": "string", "pattern": "^[A-Z]{3}$" },
+    "rates": {
+      "type": "object",
+      "description": "Map of date (YYYY-MM-DD) to a map of currency code to exchange rate.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": { "type": "number" }
+      }
+    }
+  }
+}

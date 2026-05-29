@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/draft-00/schema",
+  "name": "FixerSymbolsResponse",
+  "description": "JSON Structure for a Fixer symbols listing envelope.",
+  "type": "object",
+  "properties": {
+    "success": { "type": "boolean" },
+    "symbols": {
+      "type": "map",
+      "values": { "type": "string" }
+    }
+  },
+  "required": ["success", "symbols"]
+}

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.apilayer.com/fixer/convert?from=GBP&to=JPY&amount=25",
+    "headers": {
+      "apikey": "YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "query": {
+        "from": "GBP",
+        "to": "JPY",
+        "amount": 25
+      },
+      "info": {
+        "timestamp": 1519328414,
+        "rate": 148.972231
+      },
+      "historical": false,
+      "date": "2024-09-13",
+      "result": 3724.305775
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/fixer/json-schema/fixer-fluctuation-schema.json",
+  "title": "Fixer Fluctuation Response",
+  "description": "Envelope returned by /fluctuation summarizing rate change between two dates per currency.",
+  "type": "object",
+  "required": ["success", "fluctuation", "start_date", "end_date", "base", "rates"],
+  "properties": {
+    "success": { "type": "boolean" },
+    "fluctuation": { "type": "boolean" },
+    "start_date": { "type": "string", "format": "date" },
+    "end_date": { "type": "string", "format": "date" },
+    "base": { "type": "string", "pattern": "^[A-Z]{3}$" },
+    "rates": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["start_rate", "end_rate", "change", "change_pct"],
+        "properties": {
+          "start_rate": { "type": "number" },
+          "end_rate": { "type": "number" },
+          "change": { "type": "number" },
+          "change_pct": { "type": "number" }
+        }
+      }
+    }
+  }
+}

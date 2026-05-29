@@ -1,0 +1,68 @@
+apiVersion: capability.naftiko.dev/v1alpha1
+kind: SharedCapability
+metadata:
+  name: fixer-shared
+  provider: fixer
+  parent: apilayer
+  description: |
+    Shared building blocks for Fixer foreign exchange rate operations. These per-API
+    primitives are composed by higher-level workflow capabilities (currency
+    conversion, treasury reporting, etc.).
+spec:
+  baseUrl: https://api.apilayer.com/fixer
+  authentication:
+    type: apiKey
+    in: header
+    name: apikey
+  operations:
+    - id: getSymbols
+      method: GET
+      path: /symbols
+      summary: List Supported Currency Symbols
+      gating:
+        plan: Free
+    - id: getLatest
+      method: GET
+      path: /latest
+      summary: Get Latest Exchange Rates
+      parameters: [base, symbols]
+      gating:
+        plan: Free
+        notes: |
+          Base currency is fixed to EUR on Free. Basic and above unlock arbitrary
+          base currencies. Update cadence improves at each paid tier.
+    - id: getHistorical
+      method: GET
+      path: /{date}
+      summary: Get Historical Exchange Rates
+      parameters: [date, base, symbols]
+      gating:
+        plan: Free
+    - id: convertCurrency
+      method: GET
+      path: /convert
+      summary: Convert Currency Amount
+      parameters: [from, to, amount, date]
+      gating:
+        plan: Basic
+    - id: getTimeSeries
+      method: GET
+      path: /timeseries
+      summary: Get Time Series Exchange Rates
+      parameters: [start_date, end_date, base, symbols]
+      gating:
+        plan: Professional
+    - id: getFluctuation
+      method: GET
+      path: /fluctuation
+      summary: Get Fluctuation Data
+      parameters: [start_date, end_date, base, symbols]
+      gating:
+        plan: "Professional Plus"
+  errorEnvelope:
+    schema:
+      success: false
+      error:
+        code: integer
+        type: string
+        info: string

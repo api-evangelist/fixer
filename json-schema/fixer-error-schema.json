@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/fixer/json-schema/fixer-error-schema.json",
+  "title": "Fixer Error Response",
+  "description": "Envelope returned by Fixer when a request fails, with a numeric code, machine-readable type, and human-readable info.",
+  "type": "object",
+  "required": ["success", "error"],
+  "properties": {
+    "success": { "type": "boolean", "const": false },
+    "error": {
+      "type": "object",
+      "required": ["code", "type", "info"],
+      "properties": {
+        "code": { "type": "integer" },
+        "type": { "type": "string" },
+        "info": { "type": "string" }
+      }
+    }
+  }
+}

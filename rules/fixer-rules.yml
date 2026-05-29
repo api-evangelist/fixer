@@ -1,0 +1,125 @@
+extends:
+  - spectral:oas
+rules:
+  # All operations MUST have an operationId in lowerCamelCase
+  fixer-operation-id-required:
+    description: Every operation must have a non-empty operationId.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+
+  fixer-operation-id-camel-case:
+    description: operationId values must be lowerCamelCase.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  # Every operation MUST have a summary in Title Case
+  fixer-operation-summary-required:
+    description: Every operation must have a summary.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+
+  fixer-operation-summary-title-case:
+    description: Operation summaries must use Title Case.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-zA-Z0-9]*)( ([A-Z][a-zA-Z0-9]*|of|to|for|in|on|by|the|and|or|a|an))*$"
+
+  # Every operation MUST have a description
+  fixer-operation-description-required:
+    description: Every operation must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+
+  # Every operation MUST have at least one tag matching the declared global tags
+  fixer-operation-tags-required:
+    description: Every operation must declare at least one tag.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+
+  # Currency code parameters MUST follow ISO 4217 (three uppercase letters in examples)
+  fixer-currency-code-example-format:
+    description: Currency code examples (base/symbols/from/to) must be uppercase ISO 4217 codes.
+    severity: warn
+    given: $.paths[*].get.parameters[?(@.name=='base' || @.name=='from' || @.name=='to')].schema.example
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]{3}$"
+
+  # Date parameters MUST be format: date
+  fixer-date-parameter-format:
+    description: Date-valued parameters must declare schema.format = 'date'.
+    severity: warn
+    given: $.paths[*].get.parameters[?(@.name=='date' || @.name=='start_date' || @.name=='end_date')].schema
+    then:
+      field: format
+      function: truthy
+
+  # Every response schema MUST include a top-level 'success' boolean (Fixer envelope convention)
+  fixer-response-success-envelope:
+    description: Response schemas must include a `success` boolean property.
+    severity: warn
+    given: $.components.schemas[?(@property!='ErrorResponse' && @property!='FluctuationEntry')].properties
+    then:
+      field: success
+      function: truthy
+
+  # Error responses MUST conform to the Fixer error envelope
+  fixer-error-envelope:
+    description: ErrorResponse schema must include success=false and a nested error object with code/type/info.
+    severity: error
+    given: $.components.schemas.ErrorResponse.properties
+    then:
+      field: error
+      function: truthy
+
+  # API key auth must be defined and referenced
+  fixer-apikey-security-scheme:
+    description: ApiKeyAuth security scheme must be defined as a header named 'apikey'.
+    severity: error
+    given: $.components.securitySchemes.ApiKeyAuth
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - type
+            - in
+            - name
+          properties:
+            type:
+              const: apiKey
+            in:
+              const: header
+            name:
+              const: apikey
+
+  # Servers should include the APILayer-hosted endpoint
+  fixer-server-apilayer-required:
+    description: At least one server must point at api.apilayer.com/fixer.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "api\\.apilayer\\.com/fixer"

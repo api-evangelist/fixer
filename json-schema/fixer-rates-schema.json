@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/fixer/json-schema/fixer-rates-schema.json",
+  "title": "Fixer Rates Response",
+  "description": "Envelope returned by /latest and /{date} containing real-time or historical end-of-day exchange rates.",
+  "type": "object",
+  "required": ["success", "timestamp", "base", "date", "rates"],
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "description": "Indicates whether the request succeeded."
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Unix timestamp (seconds) when the rates were published."
+    },
+    "historical": {
+      "type": "boolean",
+      "description": "Present and true when the response represents historical rates."
+    },
+    "base": {
+      "type": "string",
+      "description": "ISO 4217 base currency code anchoring the rate set.",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the rates apply to (YYYY-MM-DD)."
+    },
+    "rates": {
+      "type": "object",
+      "description": "Map of ISO 4217 currency code to exchange rate against the base currency.",
+      "additionalProperties": {
+        "type": "number"
+      }
+    }
+  }
+}

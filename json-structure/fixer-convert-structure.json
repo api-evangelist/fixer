@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/draft-00/schema",
+  "name": "FixerConvertResponse",
+  "description": "JSON Structure for a Fixer conversion envelope.",
+  "type": "object",
+  "properties": {
+    "success": { "type": "boolean" },
+    "query": {
+      "type": "object",
+      "properties": {
+        "from": { "type": "string", "x-format": "iso4217" },
+        "to": { "type": "string", "x-format": "iso4217" },
+        "amount": { "type": "double" }
+      },
+      "required": ["from", "to", "amount"]
+    },
+    "info": {
+      "type": "object",
+      "properties": {
+        "timestamp": { "type": "int64" },
+        "rate": { "type": "double" }
+      },
+      "required": ["timestamp", "rate"]
+    },
+    "historical": { "type": "boolean" },
+    "date": { "type": "string", "x-format": "date" },
+    "result": { "type": "double" }
+  },
+  "required": ["success", "query", "info", "result"]
+}

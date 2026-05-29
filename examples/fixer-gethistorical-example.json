@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.apilayer.com/fixer/2013-12-24?base=GBP&symbols=USD,CAD,EUR",
+    "headers": {
+      "apikey": "YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "historical": true,
+      "date": "2013-12-24",
+      "timestamp": 1387929599,
+      "base": "GBP",
+      "rates": {
+        "USD": 1.636492,
+        "EUR": 1.196476,
+        "CAD": 1.739516
+      }
+    }
+  }
+}

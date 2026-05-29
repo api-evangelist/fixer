@@ -1,0 +1,76 @@
+name: Fixer Rate Limits
+description: |
+  Request-rate, concurrency, and quota policies for the Fixer API, captured
+  against the API Commons Rate Limits 0.1 specification.
+url: https://raw.githubusercontent.com/api-evangelist/fixer/main/rate-limits/fixer-rate-limits.yml
+created: '2026-05-29'
+modified: '2026-05-29'
+specificationVersion: '0.1'
+provider: fixer
+
+scope: per-api-key
+
+quotas:
+  - plan: free
+    requests: 100
+    window: month
+    enforcement: hard-stop
+    overageAllowed: false
+  - plan: basic
+    requests: 10000
+    window: month
+    enforcement: soft-stop
+    overageAllowed: true
+    overagePricePerRequest: 0.005996
+  - plan: professional
+    requests: 100000
+    window: month
+    enforcement: soft-stop
+    overageAllowed: true
+    overagePricePerRequest: 0.0023996
+  - plan: professional-plus
+    requests: 500000
+    window: month
+    enforcement: soft-stop
+    overageAllowed: true
+    overagePricePerRequest: 0.00079992
+  - plan: enterprise
+    requests: null
+    window: month
+    enforcement: negotiated
+    overageAllowed: true
+    overagePricePerRequest: negotiated
+
+rateLimits:
+  perMinute:
+    notes: |
+      Fixer / APILayer do not publish a hard per-minute throttle on the public marketplace
+      listing. Consumers should expect short-window bursting and back off on HTTP 429.
+  concurrency:
+    notes: |
+      Concurrency is not capped per request; rate caps are enforced via the monthly
+      quota and the standard APILayer 429 response.
+
+responsePolicy:
+  exceededStatus: 429
+  exceededBody:
+    success: false
+    error:
+      code: 104
+      type: monthly_limit_reached
+      info: Your monthly API request volume has been reached. Please upgrade your plan.
+
+freshness:
+  free: hourly
+  basic: hourly
+  professional: 10-minute
+  professional-plus: 60-second
+  enterprise: 60-second
+
+upgradeGuidance:
+  - trigger: Sustained 429 / monthly_limit_reached
+    action: Upgrade to the next-tier plan or pre-purchase overage credit.
+  - trigger: Need sub-10-minute freshness
+    action: Move to Professional Plus or Enterprise.
+  - trigger: Multi-region SLA or volume discount
+    action: Move to Enterprise with a negotiated contract.

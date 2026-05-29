@@ -1,0 +1,202 @@
+name: Fixer Plans and Pricing
+description: |
+  Commercial plan surface for the Fixer foreign exchange API, captured against the
+  API Commons Plans 0.1 specification. Pricing and quotas reflect the APILayer
+  marketplace listing.
+url: https://raw.githubusercontent.com/api-evangelist/fixer/main/plans/fixer-plans-pricing.yml
+created: '2026-05-29'
+modified: '2026-05-29'
+specificationVersion: '0.1'
+provider: fixer
+currency: USD
+billingCycle: monthly
+annualDiscount:
+  available: true
+  notes: Annual billing offers up to ~15% savings versus monthly across paid tiers.
+
+plans:
+  - id: free
+    name: Free
+    price: 0
+    interval: monthly
+    quota:
+      requests: 100
+      window: month
+    refreshCadence: hourly
+    features:
+      - id: latest-rates
+        included: true
+      - id: historical-rates
+        included: true
+      - id: symbols-discovery
+        included: true
+      - id: source-currency-switching
+        included: false
+        notes: Base currency fixed to EUR.
+      - id: https-encryption
+        included: false
+        notes: HTTP only on Free.
+      - id: currency-conversion-endpoint
+        included: false
+      - id: time-series-endpoint
+        included: false
+      - id: fluctuation-endpoint
+        included: false
+    support: None
+    overage:
+      allowed: false
+
+  - id: basic
+    name: Basic
+    price: 14.99
+    annualPrice: 13.99
+    interval: monthly
+    quota:
+      requests: 10000
+      window: month
+    refreshCadence: hourly
+    features:
+      - id: latest-rates
+        included: true
+      - id: historical-rates
+        included: true
+      - id: symbols-discovery
+        included: true
+      - id: source-currency-switching
+        included: true
+      - id: https-encryption
+        included: true
+      - id: currency-conversion-endpoint
+        included: true
+      - id: time-series-endpoint
+        included: false
+      - id: fluctuation-endpoint
+        included: false
+    support: Standard
+    overage:
+      allowed: true
+      pricePerRequest: 0.005996
+
+  - id: professional
+    name: Professional
+    price: 59.99
+    annualPrice: 52.99
+    interval: monthly
+    quota:
+      requests: 100000
+      window: month
+    refreshCadence: 10-minute
+    features:
+      - id: latest-rates
+        included: true
+      - id: historical-rates
+        included: true
+      - id: symbols-discovery
+        included: true
+      - id: source-currency-switching
+        included: true
+      - id: https-encryption
+        included: true
+      - id: currency-conversion-endpoint
+        included: true
+      - id: time-series-endpoint
+        included: true
+      - id: fluctuation-endpoint
+        included: false
+    support: Standard
+    overage:
+      allowed: true
+      pricePerRequest: 0.0023996
+
+  - id: professional-plus
+    name: Professional Plus
+    price: 99.99
+    annualPrice: 84.99
+    interval: monthly
+    quota:
+      requests: 500000
+      window: month
+    refreshCadence: 60-second
+    features:
+      - id: latest-rates
+        included: true
+      - id: historical-rates
+        included: true
+      - id: symbols-discovery
+        included: true
+      - id: source-currency-switching
+        included: true
+      - id: https-encryption
+        included: true
+      - id: currency-conversion-endpoint
+        included: true
+      - id: time-series-endpoint
+        included: true
+      - id: fluctuation-endpoint
+        included: true
+    support: Standard
+    overage:
+      allowed: true
+      pricePerRequest: 0.00079992
+
+  - id: enterprise
+    name: Enterprise
+    price: null
+    priceNotes: Custom — contact sales for volume pricing (annual billing).
+    interval: annual
+    quota:
+      requests: null
+      window: month
+      notes: Volume-based; tailored to customer forecast.
+    refreshCadence: 60-second
+    features:
+      - id: latest-rates
+        included: true
+      - id: historical-rates
+        included: true
+      - id: symbols-discovery
+        included: true
+      - id: source-currency-switching
+        included: true
+      - id: https-encryption
+        included: true
+      - id: currency-conversion-endpoint
+        included: true
+      - id: time-series-endpoint
+        included: true
+      - id: fluctuation-endpoint
+        included: true
+      - id: custom-solutions
+        included: true
+      - id: dedicated-account-team
+        included: true
+      - id: priority-support
+        included: true
+    support: Dedicated
+    overage:
+      allowed: true
+      pricePerRequest: negotiated
+
+featureCatalog:
+  - id: latest-rates
+    label: Latest Exchange Rates (/latest)
+  - id: historical-rates
+    label: Historical Exchange Rates (/{date})
+  - id: symbols-discovery
+    label: Symbols Discovery (/symbols)
+  - id: source-currency-switching
+    label: Source / Base Currency Switching
+  - id: https-encryption
+    label: HTTPS / SSL Encryption
+  - id: currency-conversion-endpoint
+    label: Currency Conversion Endpoint (/convert)
+  - id: time-series-endpoint
+    label: Time Series Endpoint (/timeseries)
+  - id: fluctuation-endpoint
+    label: Fluctuation Endpoint (/fluctuation)
+  - id: custom-solutions
+    label: Custom Solutions
+  - id: dedicated-account-team
+    label: Dedicated Account Team
+  - id: priority-support
+    label: Priority Support

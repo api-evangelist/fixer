@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.apilayer.com/fixer/latest?base=USD&symbols=AUD,CAD,EUR,GBP,JPY",
+    "headers": {
+      "apikey": "YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "timestamp": 1519296206,
+      "base": "USD",
+      "date": "2024-09-13",
+      "rates": {
+        "AUD": 1.566015,
+        "CAD": 1.560132,
+        "EUR": 0.91059,
+        "GBP": 0.76603,
+        "JPY": 132.360679
+      }
+    }
+  }
+}

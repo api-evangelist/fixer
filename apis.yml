@@ -1,9 +1,8 @@
 aid: fixer
 name: Fixer
 description: >-
-  Fixer is a lightweight JSON API for real-time and historical foreign exchange
-  rates and currency conversion. Built on top of European Central Bank reference
-  rates and 15+ additional data sources, Fixer supports 170+ world currencies and
+  Fixer is a lightweight JSON API for real-time and historical foreign exchange rates and currency conversion. Built on
+  top of European Central Bank reference rates and 15+ additional data sources, Fixer supports 170+ world currencies and
   is delivered through the APILayer marketplace under a freemium subscription model.
 url: https://fixer.io
 specificationVersion: '0.20'
@@ -32,9 +31,9 @@ apis:
   - aid: fixer:fixer-api
     name: Fixer API
     description: >-
-      The Fixer REST API exposes six operations covering symbol discovery, real-time
-      and historical rates, on-demand currency conversion, daily time-series, and
-      fluctuation reporting. Authentication is via the APILayer `apikey` header.
+      The Fixer REST API exposes six operations covering symbol discovery, real-time and historical rates, on-demand
+      currency conversion, daily time-series, and fluctuation reporting. Authentication is via the APILayer `apikey`
+      header.
     humanURL: https://fixer.io/documentation
     baseURL: https://api.apilayer.com/fixer
     tags:
@@ -142,14 +141,6 @@ common:
     url: rules/fixer-rules.yml
   - type: Vocabulary
     url: vocabulary/fixer-vocabulary.yml
-  - type: NaftikoCapability
-    url: capabilities/shared/fixer-shared.yaml
-  - type: NaftikoCapability
-    url: capabilities/currency-conversion.yaml
-  - type: NaftikoCapability
-    url: capabilities/treasury-reporting.yaml
-  - type: NaftikoCapability
-    url: capabilities/historical-rate-lookup.yaml
   - type: Plans
     url: plans/fixer-plans-pricing.yml
   - type: RateLimits

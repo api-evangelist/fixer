@@ -1,0 +1,1649 @@
+{
+  "item": [
+    {
+      "id": "67aafe22-e601-4b4e-a90f-528c5297786a",
+      "name": "Rates",
+      "description": {
+        "content": "Real-time and historical foreign exchange rate operations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6a1dbc5a-7c79-40cd-a267-ed11e0485e8e",
+          "name": "Get Latest Exchange Rates",
+          "request": {
+            "name": "Get Latest Exchange Rates",
+            "description": {
+              "content": "Returns the most recent exchange rate data. Rates update hourly on the Free and\nBasic tiers, every 10 minutes on Professional, and every 60 seconds on\nProfessional Plus and Enterprise.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "base",
+                  "value": "<string>",
+                  "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "Comma-separated list of ISO 4217 currency codes to limit the result set."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7b58726-a663-45f9-8e01-25f5389432ce",
+              "name": "Latest rates anchored to the requested base currency.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"timestamp\": 1519296206,\n  \"base\": \"EUR\",\n  \"date\": \"2018-02-22\",\n  \"rates\": {\n    \"USD\": 1.23396,\n    \"AUD\": 1.566015,\n    \"CAD\": 1.560132\n  },\n  \"historical\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d072b91d-f259-4576-8e78-50dea77d2074",
+              "name": "Missing or invalid `apikey` header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "993f8798-88d2-47a0-a337-078d7d72829c",
+              "name": "The requested feature is not included in the current subscription plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d608678-dbbd-4668-a980-522018762a15",
+              "name": "Monthly request quota exhausted or per-minute rate limit hit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e32ac91-3ad8-4f39-85e7-3a52c230b85f",
+          "name": "Get Historical Exchange Rates",
+          "request": {
+            "name": "Get Historical Exchange Rates",
+            "description": {
+              "content": "Returns end-of-day historical exchange rates for any date since 1999. Historical\ndata is available on all plans, including Free.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":date"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "base",
+                  "value": "<string>",
+                  "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "Comma-separated list of ISO 4217 currency codes to limit the result set."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) ISO-8601 date in `YYYY-MM-DD` format (any working day since 1999-01-04)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79d53cab-9f16-4fa7-9ef0-4b2f25407850",
+              "name": "Historical end-of-day rates for the requested date.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) ISO-8601 date in `YYYY-MM-DD` format (any working day since 1999-01-04)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"timestamp\": 1519296206,\n  \"base\": \"EUR\",\n  \"date\": \"2018-02-22\",\n  \"rates\": {\n    \"USD\": 1.23396,\n    \"AUD\": 1.566015,\n    \"CAD\": 1.560132\n  },\n  \"historical\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c1c02c4-024a-4bbb-98fe-b7ddc9985157",
+              "name": "Missing or invalid `apikey` header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) ISO-8601 date in `YYYY-MM-DD` format (any working day since 1999-01-04)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4e52acb-20b8-4454-9b97-e332ef6fffaa",
+              "name": "Monthly request quota exhausted or per-minute rate limit hit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) ISO-8601 date in `YYYY-MM-DD` format (any working day since 1999-01-04)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3666f230-93fc-4677-aaa1-3a7d97163327",
+      "name": "Symbols",
+      "description": {
+        "content": "Discovery of supported currency symbols.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e2798047-7f47-41e3-af5c-1cd4f86f71bb",
+          "name": "List Supported Currency Symbols",
+          "request": {
+            "name": "List Supported Currency Symbols",
+            "description": {
+              "content": "Returns all currency symbols Fixer supports along with their full names.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "symbols"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "902a0efe-7ac0-4204-a36d-d1330187d7b5",
+              "name": "A map of currency codes to currency names.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"symbols\": {\n    \"AED\": \"United Arab Emirates Dirham\",\n    \"AFN\": \"Afghan Afghani\",\n    \"ALL\": \"Albanian Lek\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89087362-7e78-49cb-98a5-f0d281e73c0c",
+              "name": "Missing or invalid `apikey` header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df92ad10-ed22-474d-86f1-8dfdc98b21ee",
+              "name": "Monthly request quota exhausted or per-minute rate limit hit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "symbols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b04d1bdb-99ad-4026-ac05-b12cc601964f",
+      "name": "Conversion",
+      "description": {
+        "content": "On-demand currency amount conversion.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac38f10c-ad93-47ff-8b09-2dfa49387bc5",
+          "name": "Convert Currency Amount",
+          "request": {
+            "name": "Convert Currency Amount",
+            "description": {
+              "content": "Converts an amount from one currency to another using real-time or historical\nrates. Available on Basic plan and above.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "convert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<string>",
+                  "description": "(Required) Three-letter source currency code (ISO 4217)."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "(Required) Three-letter target currency code (ISO 4217)."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "(Required) Amount to convert."
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "Optional historical date (YYYY-MM-DD) to use for the conversion rate."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9fc48a05-cbea-4f40-973b-e1e8d6ef040e",
+              "name": "Converted amount and conversion metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "GBP"
+                    },
+                    {
+                      "key": "to",
+                      "value": "JPY"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "date",
+                      "value": "2018-02-22"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"query\": {\n    \"from\": \"GBP\",\n    \"to\": \"JPY\",\n    \"amount\": 25\n  },\n  \"info\": {\n    \"timestamp\": 1519328414,\n    \"rate\": 148.972231\n  },\n  \"result\": 3724.305775,\n  \"historical\": false,\n  \"date\": \"2018-02-22\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a2f839b-3864-4eb0-b97b-918a848bbc08",
+              "name": "Missing or invalid `apikey` header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "GBP"
+                    },
+                    {
+                      "key": "to",
+                      "value": "JPY"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "date",
+                      "value": "2018-02-22"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "731344a3-2aaf-4bac-8bb5-c8bee78b1456",
+              "name": "The requested feature is not included in the current subscription plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "GBP"
+                    },
+                    {
+                      "key": "to",
+                      "value": "JPY"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "date",
+                      "value": "2018-02-22"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4f90ddc-92a0-475f-bbb4-dbc7f6e429d2",
+              "name": "Monthly request quota exhausted or per-minute rate limit hit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "GBP"
+                    },
+                    {
+                      "key": "to",
+                      "value": "JPY"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "date",
+                      "value": "2018-02-22"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "432b5dac-bc86-4910-a5b9-898b91ad4814",
+      "name": "Time Series",
+      "description": {
+        "content": "Daily historical rates between two dates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8a283dd5-9a89-4d80-b4f4-42d969043efd",
+          "name": "Get Time Series Exchange Rates",
+          "request": {
+            "name": "Get Time Series Exchange Rates",
+            "description": {
+              "content": "Returns daily historical exchange rates between two dates of your choice,\nwith a maximum range of 365 days. Available on Professional plan and above.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "timeseries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) Start date for the time series window (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) End date for the time series window (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "base",
+                  "value": "<string>",
+                  "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "Comma-separated list of ISO 4217 currency codes to limit the result set."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c7307a5-41af-4fca-baa5-d97d664f636d",
+              "name": "Map of dates to daily rates for the requested window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2012-05-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2012-05-25"
+                    },
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"timeseries\": true,\n  \"start_date\": \"2012-05-01\",\n  \"end_date\": \"2012-05-03\",\n  \"base\": \"EUR\",\n  \"rates\": {\n    \"2012-05-01\": {\n      \"USD\": 1.322891,\n      \"AUD\": 1.278047,\n      \"CAD\": 1.302303\n    },\n    \"2012-05-02\": {\n      \"USD\": 1.315066,\n      \"AUD\": 1.274202,\n      \"CAD\": 1.299083\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9055b60-fdeb-44da-8ac0-8ebc52fb2767",
+              "name": "Missing or invalid `apikey` header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2012-05-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2012-05-25"
+                    },
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04a7ec77-b03f-4950-80e6-85cfabff4961",
+              "name": "The requested feature is not included in the current subscription plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2012-05-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2012-05-25"
+                    },
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f33f3e4-6acf-4c9a-acb8-f80df8b5f65e",
+              "name": "Monthly request quota exhausted or per-minute rate limit hit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2012-05-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2012-05-25"
+                    },
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "803a2528-9d56-489c-b37e-1b968980c951",
+      "name": "Fluctuation",
+      "description": {
+        "content": "Currency fluctuation analysis between two dates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "860c4522-1a43-480e-ade9-85f3750e4bba",
+          "name": "Get Fluctuation Data",
+          "request": {
+            "name": "Get Fluctuation Data",
+            "description": {
+              "content": "Returns fluctuation data (start rate, end rate, change, change_pct) between two\ndates for any supported currency pair. Available on Professional Plus and above.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fluctuation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) Start date for the fluctuation window (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) End date for the fluctuation window (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "base",
+                  "value": "<string>",
+                  "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "Comma-separated list of ISO 4217 currency codes to limit the result set."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb941de7-1f27-4843-95e2-140134f71537",
+              "name": "Per-currency fluctuation summary for the requested window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fluctuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2018-02-25"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2018-02-26"
+                    },
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"fluctuation\": true,\n  \"start_date\": \"2018-02-25\",\n  \"end_date\": \"2018-02-26\",\n  \"base\": \"EUR\",\n  \"rates\": {\n    \"USD\": {\n      \"start_rate\": 1.228952,\n      \"end_rate\": 1.232735,\n      \"change\": 0.0038,\n      \"change_pct\": 0.3078\n    },\n    \"JPY\": {\n      \"start_rate\": 131.587611,\n      \"end_rate\": 131.651142,\n      \"change\": 0.0635,\n      \"change_pct\": 0.0483\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75f4afcf-960a-430d-8676-2507a19040c1",
+              "name": "Missing or invalid `apikey` header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fluctuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2018-02-25"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2018-02-26"
+                    },
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a03c2fe-dc72-47c2-80d2-b50e652f7d8a",
+              "name": "The requested feature is not included in the current subscription plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fluctuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2018-02-25"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2018-02-26"
+                    },
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "984ec6f4-af3d-4fc6-92a0-9b955d1a523e",
+              "name": "Monthly request quota exhausted or per-minute rate limit hit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fluctuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2018-02-25"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2018-02-26"
+                    },
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.apilayer.com/fixer",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fe83a041-9dca-4f79-b87c-2a2a9fd12f04",
+    "name": "Fixer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Fixer is a lightweight JSON API for real-time and historical foreign exchange\nrates and currency conversion. Sourced primarily from the European Central Bank\nand 15+ other exchange rate data providers, Fixer supports 170+ world currencies.\n\nThe API is delivered via the APILayer marketplace. All requests authenticate via\nan `apikey` HTTP header. The free tier is limited to 100 requests per month and\nis HTTP-only; HTTPS encryption and source-currency switching become available on\nthe Basic plan and above.\n\n\nContact Support:\n Name: Fixer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixer API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Symbols",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Supported Currency Symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apilayer.com/fixer/symbols"
+          },
+          "docs": "Returns all currency symbols Fixer supports along with their full names."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Latest Exchange Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apilayer.com/fixer/latest",
+            "params": [
+              {
+                "name": "base",
+                "value": "",
+                "type": "query",
+                "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n"
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ISO 4217 currency codes to limit the result set."
+              }
+            ]
+          },
+          "docs": "Returns the most recent exchange rate data. Rates update hourly on the Free and\nBasic tiers, every 10 minutes on Professional, and every 60 seconds on\nProfessional Plus and Enterprise.\n"
+        },
+        {
+          "info": {
+            "name": "Get Historical Exchange Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apilayer.com/fixer/:date",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "ISO-8601 date in `YYYY-MM-DD` format (any working day since 1999-01-04)."
+              },
+              {
+                "name": "base",
+                "value": "",
+                "type": "query",
+                "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n"
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ISO 4217 currency codes to limit the result set."
+              }
+            ]
+          },
+          "docs": "Returns end-of-day historical exchange rates for any date since 1999. Historical\ndata is available on all plans, including Free.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Conversion",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Convert Currency Amount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apilayer.com/fixer/convert",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Three-letter source currency code (ISO 4217)."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Three-letter target currency code (ISO 4217)."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Amount to convert."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Optional historical date (YYYY-MM-DD) to use for the conversion rate."
+              }
+            ]
+          },
+          "docs": "Converts an amount from one currency to another using real-time or historical\nrates. Available on Basic plan and above.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Time Series",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Time Series Exchange Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apilayer.com/fixer/timeseries",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the time series window (YYYY-MM-DD)."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date for the time series window (YYYY-MM-DD)."
+              },
+              {
+                "name": "base",
+                "value": "",
+                "type": "query",
+                "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n"
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ISO 4217 currency codes to limit the result set."
+              }
+            ]
+          },
+          "docs": "Returns daily historical exchange rates between two dates of your choice,\nwith a maximum range of 365 days. Available on Professional plan and above.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Fluctuation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Fluctuation Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apilayer.com/fixer/fluctuation",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the fluctuation window (YYYY-MM-DD)."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date for the fluctuation window (YYYY-MM-DD)."
+              },
+              {
+                "name": "base",
+                "value": "",
+                "type": "query",
+                "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n"
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ISO 4217 currency codes to limit the result set."
+              }
+            ]
+          },
+          "docs": "Returns fluctuation data (start rate, end rate, change, change_pct) between two\ndates for any supported currency pair. Available on Professional Plus and above.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

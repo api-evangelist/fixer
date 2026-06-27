@@ -45,7 +45,7 @@ apis:
         url: https://docs.apilayer.com/fixer/docs/api-documentation
       - type: APIReference
         url: https://apilayer.com/marketplace/fixer-api
-      - type: Quickstart
+      - type: GettingStarted
         url: https://fixer.io/quickstart
       - type: Authentication
         url: https://docs.apilayer.com/fixer/docs/api-documentation
@@ -73,19 +73,19 @@ apis:
         url: json-structure/fixer-timeseries-structure.json
       - type: JSONStructure
         url: json-structure/fixer-fluctuation-structure.json
-      - type: JSON-LD
+      - type: JSONLD
         url: json-ld/fixer-context.jsonld
-      - type: Example
+      - type: Examples
         url: examples/fixer-getsymbols-example.json
-      - type: Example
+      - type: Examples
         url: examples/fixer-getlatest-example.json
-      - type: Example
+      - type: Examples
         url: examples/fixer-gethistorical-example.json
-      - type: Example
+      - type: Examples
         url: examples/fixer-convertcurrency-example.json
-      - type: Example
+      - type: Examples
         url: examples/fixer-gettimeseries-example.json
-      - type: Example
+      - type: Examples
         url: examples/fixer-getfluctuation-example.json
       - type: RateLimits
         url: rate-limits/fixer-rate-limits.yml
@@ -119,7 +119,7 @@ common:
     url: https://apilayer.com/marketplace/fixer-api
   - type: Pricing
     url: https://fixer.io/product
-  - type: SignUp
+  - type: Signup
     url: https://apilayer.com/signup
   - type: Login
     url: https://apilayer.com/login

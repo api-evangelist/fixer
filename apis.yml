@@ -111,6 +111,10 @@ apis:
         endpoint: /fluctuation
         summary: Get Fluctuation Data
 common:
+  - type: DomainSecurity
+    url: security/fixer-domain-security.yml
+  - type: Authentication
+    url: authentication/fixer-authentication.yml
   - type: Website
     url: https://fixer.io
   - type: Documentation

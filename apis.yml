@@ -111,6 +111,8 @@ apis:
         endpoint: /fluctuation
         summary: Get Fluctuation Data
 common:
+  - type: AgenticAccess
+    url: agentic-access/fixer-agentic-access.yml
   - type: DomainSecurity
     url: security/fixer-domain-security.yml
   - type: Authentication

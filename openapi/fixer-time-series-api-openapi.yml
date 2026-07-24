@@ -1,0 +1,196 @@
+openapi: 3.0.3
+info:
+  title: Fixer Conversion Time Series API
+  description: 'Fixer is a lightweight JSON API for real-time and historical foreign exchange
+
+    rates and currency conversion. Sourced primarily from the European Central Bank
+
+    and 15+ other exchange rate data providers, Fixer supports 170+ world currencies.
+
+
+    The API is delivered via the APILayer marketplace. All requests authenticate via
+
+    an `apikey` HTTP header. The free tier is limited to 100 requests per month and
+
+    is HTTP-only; HTTPS encryption and source-currency switching become available on
+
+    the Basic plan and above.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Fixer Support
+    url: https://fixer.io/contact
+  license:
+    name: Commercial
+    url: https://fixer.io/terms
+  termsOfService: https://fixer.io/terms
+  x-provider: fixer
+  x-parent: apilayer
+servers:
+- url: https://api.apilayer.com/fixer
+  description: APILayer-hosted production endpoint (current)
+- url: http://data.fixer.io/api
+  description: Legacy data.fixer.io endpoint (HTTP, free tier)
+- url: https://data.fixer.io/api
+  description: Legacy data.fixer.io endpoint (HTTPS, paid tiers)
+security:
+- ApiKeyAuth: []
+tags:
+- name: Time Series
+  description: Daily historical rates between two dates.
+paths:
+  /timeseries:
+    get:
+      operationId: getTimeSeries
+      summary: Get Time Series Exchange Rates
+      description: 'Returns daily historical exchange rates between two dates of your choice,
+
+        with a maximum range of 365 days. Available on Professional plan and above.
+
+        '
+      tags:
+      - Time Series
+      parameters:
+      - name: start_date
+        in: query
+        required: true
+        description: Start date for the time series window (YYYY-MM-DD).
+        schema:
+          type: string
+          format: date
+          example: '2012-05-01'
+      - name: end_date
+        in: query
+        required: true
+        description: End date for the time series window (YYYY-MM-DD).
+        schema:
+          type: string
+          format: date
+          example: '2012-05-25'
+      - $ref: '#/components/parameters/Base'
+      - $ref: '#/components/parameters/Symbols'
+      responses:
+        '200':
+          description: Map of dates to daily rates for the requested window.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSeriesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    RateLimited:
+      description: Monthly request quota exhausted or per-minute rate limit hit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid `apikey` header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The requested feature is not included in the current subscription plan.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    TimeSeriesResponse:
+      type: object
+      required:
+      - success
+      - timeseries
+      - start_date
+      - end_date
+      - base
+      - rates
+      properties:
+        success:
+          type: boolean
+          example: true
+        timeseries:
+          type: boolean
+          example: true
+        start_date:
+          type: string
+          format: date
+          example: '2012-05-01'
+        end_date:
+          type: string
+          format: date
+          example: '2012-05-03'
+        base:
+          type: string
+          example: EUR
+        rates:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: number
+          example:
+            '2012-05-01':
+              USD: 1.322891
+              AUD: 1.278047
+              CAD: 1.302303
+            '2012-05-02':
+              USD: 1.315066
+              AUD: 1.274202
+              CAD: 1.299083
+    ErrorResponse:
+      type: object
+      required:
+      - success
+      - error
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              example: 104
+            type:
+              type: string
+              example: monthly_limit_reached
+            info:
+              type: string
+              example: Your monthly API request volume has been reached. Please upgrade your plan.
+  parameters:
+    Symbols:
+      name: symbols
+      in: query
+      required: false
+      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
+      schema:
+        type: string
+        example: USD,AUD,CAD,PLN,MXN
+    Base:
+      name: base
+      in: query
+      required: false
+      description: 'Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;
+
+        any base currency may be selected on Basic plan and above.
+
+        '
+      schema:
+        type: string
+        example: USD
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apikey
+      description: APILayer API key provisioned at https://apilayer.com/marketplace/fixer-api.

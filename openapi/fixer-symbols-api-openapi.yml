@@ -1,0 +1,119 @@
+openapi: 3.0.3
+info:
+  title: Fixer Conversion Symbols API
+  description: 'Fixer is a lightweight JSON API for real-time and historical foreign exchange
+
+    rates and currency conversion. Sourced primarily from the European Central Bank
+
+    and 15+ other exchange rate data providers, Fixer supports 170+ world currencies.
+
+
+    The API is delivered via the APILayer marketplace. All requests authenticate via
+
+    an `apikey` HTTP header. The free tier is limited to 100 requests per month and
+
+    is HTTP-only; HTTPS encryption and source-currency switching become available on
+
+    the Basic plan and above.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Fixer Support
+    url: https://fixer.io/contact
+  license:
+    name: Commercial
+    url: https://fixer.io/terms
+  termsOfService: https://fixer.io/terms
+  x-provider: fixer
+  x-parent: apilayer
+servers:
+- url: https://api.apilayer.com/fixer
+  description: APILayer-hosted production endpoint (current)
+- url: http://data.fixer.io/api
+  description: Legacy data.fixer.io endpoint (HTTP, free tier)
+- url: https://data.fixer.io/api
+  description: Legacy data.fixer.io endpoint (HTTPS, paid tiers)
+security:
+- ApiKeyAuth: []
+tags:
+- name: Symbols
+  description: Discovery of supported currency symbols.
+paths:
+  /symbols:
+    get:
+      operationId: getSymbols
+      summary: List Supported Currency Symbols
+      description: Returns all currency symbols Fixer supports along with their full names.
+      tags:
+      - Symbols
+      responses:
+        '200':
+          description: A map of currency codes to currency names.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SymbolsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid `apikey` header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: Monthly request quota exhausted or per-minute rate limit hit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    SymbolsResponse:
+      type: object
+      required:
+      - success
+      - symbols
+      properties:
+        success:
+          type: boolean
+          example: true
+        symbols:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            AED: United Arab Emirates Dirham
+            AFN: Afghan Afghani
+            ALL: Albanian Lek
+    ErrorResponse:
+      type: object
+      required:
+      - success
+      - error
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              example: 104
+            type:
+              type: string
+              example: monthly_limit_reached
+            info:
+              type: string
+              example: Your monthly API request volume has been reached. Please upgrade your plan.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apikey
+      description: APILayer API key provisioned at https://apilayer.com/marketplace/fixer-api.

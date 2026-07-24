@@ -1,0 +1,207 @@
+openapi: 3.0.3
+info:
+  title: Fixer Conversion Rates API
+  description: 'Fixer is a lightweight JSON API for real-time and historical foreign exchange
+
+    rates and currency conversion. Sourced primarily from the European Central Bank
+
+    and 15+ other exchange rate data providers, Fixer supports 170+ world currencies.
+
+
+    The API is delivered via the APILayer marketplace. All requests authenticate via
+
+    an `apikey` HTTP header. The free tier is limited to 100 requests per month and
+
+    is HTTP-only; HTTPS encryption and source-currency switching become available on
+
+    the Basic plan and above.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Fixer Support
+    url: https://fixer.io/contact
+  license:
+    name: Commercial
+    url: https://fixer.io/terms
+  termsOfService: https://fixer.io/terms
+  x-provider: fixer
+  x-parent: apilayer
+servers:
+- url: https://api.apilayer.com/fixer
+  description: APILayer-hosted production endpoint (current)
+- url: http://data.fixer.io/api
+  description: Legacy data.fixer.io endpoint (HTTP, free tier)
+- url: https://data.fixer.io/api
+  description: Legacy data.fixer.io endpoint (HTTPS, paid tiers)
+security:
+- ApiKeyAuth: []
+tags:
+- name: Rates
+  description: Real-time and historical foreign exchange rate operations.
+paths:
+  /latest:
+    get:
+      operationId: getLatest
+      summary: Get Latest Exchange Rates
+      description: 'Returns the most recent exchange rate data. Rates update hourly on the Free and
+
+        Basic tiers, every 10 minutes on Professional, and every 60 seconds on
+
+        Professional Plus and Enterprise.
+
+        '
+      tags:
+      - Rates
+      parameters:
+      - $ref: '#/components/parameters/Base'
+      - $ref: '#/components/parameters/Symbols'
+      responses:
+        '200':
+          description: Latest rates anchored to the requested base currency.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /{date}:
+    get:
+      operationId: getHistorical
+      summary: Get Historical Exchange Rates
+      description: 'Returns end-of-day historical exchange rates for any date since 1999. Historical
+
+        data is available on all plans, including Free.
+
+        '
+      tags:
+      - Rates
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: ISO-8601 date in `YYYY-MM-DD` format (any working day since 1999-01-04).
+        schema:
+          type: string
+          format: date
+          example: '2013-12-24'
+      - $ref: '#/components/parameters/Base'
+      - $ref: '#/components/parameters/Symbols'
+      responses:
+        '200':
+          description: Historical end-of-day rates for the requested date.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    RateLimited:
+      description: Monthly request quota exhausted or per-minute rate limit hit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid `apikey` header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The requested feature is not included in the current subscription plan.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    Base:
+      name: base
+      in: query
+      required: false
+      description: 'Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;
+
+        any base currency may be selected on Basic plan and above.
+
+        '
+      schema:
+        type: string
+        example: USD
+    Symbols:
+      name: symbols
+      in: query
+      required: false
+      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
+      schema:
+        type: string
+        example: USD,AUD,CAD,PLN,MXN
+  schemas:
+    ErrorResponse:
+      type: object
+      required:
+      - success
+      - error
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              example: 104
+            type:
+              type: string
+              example: monthly_limit_reached
+            info:
+              type: string
+              example: Your monthly API request volume has been reached. Please upgrade your plan.
+    RatesResponse:
+      type: object
+      required:
+      - success
+      - timestamp
+      - base
+      - date
+      - rates
+      properties:
+        success:
+          type: boolean
+          example: true
+        timestamp:
+          type: integer
+          format: int64
+          example: 1519296206
+        base:
+          type: string
+          example: EUR
+        date:
+          type: string
+          format: date
+          example: '2018-02-22'
+        historical:
+          type: boolean
+          example: false
+        rates:
+          type: object
+          additionalProperties:
+            type: number
+          example:
+            USD: 1.23396
+            AUD: 1.566015
+            CAD: 1.560132
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apikey
+      description: APILayer API key provisioned at https://apilayer.com/marketplace/fixer-api.

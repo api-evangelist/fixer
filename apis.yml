@@ -5,6 +5,19 @@ description: >-
   top of European Central Bank reference rates and 15+ additional data sources, Fixer supports 170+ world currencies and
   is delivered through the APILayer marketplace under a freemium subscription model.
 url: https://fixer.io
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-05-28'
 modified: '2026-05-29'
@@ -14,7 +27,7 @@ x-type: company
 x-tier: 3
 x-tier-reason: bulk-registered-from-public-apis
 x-parent: apilayer
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fixer.png
 tags:
   - Currency Exchange
   - Foreign Exchange
@@ -28,89 +41,299 @@ tags:
   - APILayer
   - Public APIs
 apis:
-  - aid: fixer:fixer-api
-    name: Fixer API
-    description: >-
-      The Fixer REST API exposes six operations covering symbol discovery, real-time and historical rates, on-demand
-      currency conversion, daily time-series, and fluctuation reporting. Authentication is via the APILayer `apikey`
-      header.
-    humanURL: https://fixer.io/documentation
-    baseURL: https://api.apilayer.com/fixer
-    tags:
-      - Currency Exchange
-      - Foreign Exchange
-      - APILayer
-    properties:
-      - type: Documentation
-        url: https://docs.apilayer.com/fixer/docs/api-documentation
-      - type: APIReference
-        url: https://apilayer.com/marketplace/fixer-api
-      - type: GettingStarted
-        url: https://fixer.io/quickstart
-      - type: Authentication
-        url: https://docs.apilayer.com/fixer/docs/api-documentation
-      - type: OpenAPI
-        url: openapi/fixer-openapi.yml
-      - type: JSONSchema
-        url: json-schema/fixer-rates-schema.json
-      - type: JSONSchema
-        url: json-schema/fixer-symbols-schema.json
-      - type: JSONSchema
-        url: json-schema/fixer-convert-schema.json
-      - type: JSONSchema
-        url: json-schema/fixer-timeseries-schema.json
-      - type: JSONSchema
-        url: json-schema/fixer-fluctuation-schema.json
-      - type: JSONSchema
-        url: json-schema/fixer-error-schema.json
-      - type: JSONStructure
-        url: json-structure/fixer-rates-structure.json
-      - type: JSONStructure
-        url: json-structure/fixer-symbols-structure.json
-      - type: JSONStructure
-        url: json-structure/fixer-convert-structure.json
-      - type: JSONStructure
-        url: json-structure/fixer-timeseries-structure.json
-      - type: JSONStructure
-        url: json-structure/fixer-fluctuation-structure.json
-      - type: JSONLD
-        url: json-ld/fixer-context.jsonld
-      - type: Examples
-        url: examples/fixer-getsymbols-example.json
-      - type: Examples
-        url: examples/fixer-getlatest-example.json
-      - type: Examples
-        url: examples/fixer-gethistorical-example.json
-      - type: Examples
-        url: examples/fixer-convertcurrency-example.json
-      - type: Examples
-        url: examples/fixer-gettimeseries-example.json
-      - type: Examples
-        url: examples/fixer-getfluctuation-example.json
-      - type: RateLimits
-        url: rate-limits/fixer-rate-limits.yml
-      - type: Pricing
-        url: plans/fixer-plans-pricing.yml
-    operations:
-      - method: GET
-        endpoint: /symbols
-        summary: List Supported Currency Symbols
-      - method: GET
-        endpoint: /latest
-        summary: Get Latest Exchange Rates
-      - method: GET
-        endpoint: /{date}
-        summary: Get Historical Exchange Rates
-      - method: GET
-        endpoint: /convert
-        summary: Convert Currency Amount
-      - method: GET
-        endpoint: /timeseries
-        summary: Get Time Series Exchange Rates
-      - method: GET
-        endpoint: /fluctuation
-        summary: Get Fluctuation Data
+- aid: fixer:fixer-conversion-api
+  name: Fixer Conversion API
+  description: On-demand currency amount conversion.
+  humanURL: https://fixer.io/documentation
+  baseURL: https://api.apilayer.com/fixer
+  tags:
+  - Conversion
+  properties:
+  - type: OpenAPI
+    url: openapi/fixer-conversion-api-openapi.yml
+  - type: Documentation
+    url: https://docs.apilayer.com/fixer/docs/api-documentation
+  - type: APIReference
+    url: https://apilayer.com/marketplace/fixer-api
+  - type: GettingStarted
+    url: https://fixer.io/quickstart
+  - type: Authentication
+    url: https://docs.apilayer.com/fixer/docs/api-documentation
+  - type: JSONSchema
+    url: json-schema/fixer-rates-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-symbols-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-convert-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-timeseries-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-fluctuation-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-error-schema.json
+  - type: JSONStructure
+    url: json-structure/fixer-rates-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-symbols-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-convert-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-timeseries-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-fluctuation-structure.json
+  - type: JSONLD
+    url: json-ld/fixer-context.jsonld
+  - type: Examples
+    url: examples/fixer-getsymbols-example.json
+  - type: Examples
+    url: examples/fixer-getlatest-example.json
+  - type: Examples
+    url: examples/fixer-gethistorical-example.json
+  - type: Examples
+    url: examples/fixer-convertcurrency-example.json
+  - type: Examples
+    url: examples/fixer-gettimeseries-example.json
+  - type: Examples
+    url: examples/fixer-getfluctuation-example.json
+  - type: RateLimits
+    url: rate-limits/fixer-rate-limits.yml
+  - type: Pricing
+    url: plans/fixer-plans-pricing.yml
+- aid: fixer:fixer-fluctuation-api
+  name: Fixer Fluctuation API
+  description: Currency fluctuation analysis between two dates.
+  humanURL: https://fixer.io/documentation
+  baseURL: https://api.apilayer.com/fixer
+  tags:
+  - Fluctuation
+  properties:
+  - type: OpenAPI
+    url: openapi/fixer-fluctuation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.apilayer.com/fixer/docs/api-documentation
+  - type: APIReference
+    url: https://apilayer.com/marketplace/fixer-api
+  - type: GettingStarted
+    url: https://fixer.io/quickstart
+  - type: Authentication
+    url: https://docs.apilayer.com/fixer/docs/api-documentation
+  - type: JSONSchema
+    url: json-schema/fixer-rates-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-symbols-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-convert-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-timeseries-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-fluctuation-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-error-schema.json
+  - type: JSONStructure
+    url: json-structure/fixer-rates-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-symbols-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-convert-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-timeseries-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-fluctuation-structure.json
+  - type: JSONLD
+    url: json-ld/fixer-context.jsonld
+  - type: Examples
+    url: examples/fixer-getsymbols-example.json
+  - type: Examples
+    url: examples/fixer-getlatest-example.json
+  - type: Examples
+    url: examples/fixer-gethistorical-example.json
+  - type: Examples
+    url: examples/fixer-convertcurrency-example.json
+  - type: Examples
+    url: examples/fixer-gettimeseries-example.json
+  - type: Examples
+    url: examples/fixer-getfluctuation-example.json
+  - type: RateLimits
+    url: rate-limits/fixer-rate-limits.yml
+  - type: Pricing
+    url: plans/fixer-plans-pricing.yml
+- aid: fixer:fixer-rates-api
+  name: Fixer Rates API
+  description: Real-time and historical foreign exchange rate operations.
+  humanURL: https://fixer.io/documentation
+  baseURL: https://api.apilayer.com/fixer
+  tags:
+  - Rates
+  properties:
+  - type: OpenAPI
+    url: openapi/fixer-rates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.apilayer.com/fixer/docs/api-documentation
+  - type: APIReference
+    url: https://apilayer.com/marketplace/fixer-api
+  - type: GettingStarted
+    url: https://fixer.io/quickstart
+  - type: Authentication
+    url: https://docs.apilayer.com/fixer/docs/api-documentation
+  - type: JSONSchema
+    url: json-schema/fixer-rates-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-symbols-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-convert-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-timeseries-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-fluctuation-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-error-schema.json
+  - type: JSONStructure
+    url: json-structure/fixer-rates-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-symbols-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-convert-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-timeseries-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-fluctuation-structure.json
+  - type: JSONLD
+    url: json-ld/fixer-context.jsonld
+  - type: Examples
+    url: examples/fixer-getsymbols-example.json
+  - type: Examples
+    url: examples/fixer-getlatest-example.json
+  - type: Examples
+    url: examples/fixer-gethistorical-example.json
+  - type: Examples
+    url: examples/fixer-convertcurrency-example.json
+  - type: Examples
+    url: examples/fixer-gettimeseries-example.json
+  - type: Examples
+    url: examples/fixer-getfluctuation-example.json
+  - type: RateLimits
+    url: rate-limits/fixer-rate-limits.yml
+  - type: Pricing
+    url: plans/fixer-plans-pricing.yml
+- aid: fixer:fixer-symbols-api
+  name: Fixer Symbols API
+  description: Discovery of supported currency symbols.
+  humanURL: https://fixer.io/documentation
+  baseURL: https://api.apilayer.com/fixer
+  tags:
+  - Symbols
+  properties:
+  - type: OpenAPI
+    url: openapi/fixer-symbols-api-openapi.yml
+  - type: Documentation
+    url: https://docs.apilayer.com/fixer/docs/api-documentation
+  - type: APIReference
+    url: https://apilayer.com/marketplace/fixer-api
+  - type: GettingStarted
+    url: https://fixer.io/quickstart
+  - type: Authentication
+    url: https://docs.apilayer.com/fixer/docs/api-documentation
+  - type: JSONSchema
+    url: json-schema/fixer-rates-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-symbols-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-convert-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-timeseries-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-fluctuation-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-error-schema.json
+  - type: JSONStructure
+    url: json-structure/fixer-rates-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-symbols-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-convert-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-timeseries-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-fluctuation-structure.json
+  - type: JSONLD
+    url: json-ld/fixer-context.jsonld
+  - type: Examples
+    url: examples/fixer-getsymbols-example.json
+  - type: Examples
+    url: examples/fixer-getlatest-example.json
+  - type: Examples
+    url: examples/fixer-gethistorical-example.json
+  - type: Examples
+    url: examples/fixer-convertcurrency-example.json
+  - type: Examples
+    url: examples/fixer-gettimeseries-example.json
+  - type: Examples
+    url: examples/fixer-getfluctuation-example.json
+  - type: RateLimits
+    url: rate-limits/fixer-rate-limits.yml
+  - type: Pricing
+    url: plans/fixer-plans-pricing.yml
+- aid: fixer:fixer-time-series-api
+  name: Fixer Time Series API
+  description: Daily historical rates between two dates.
+  humanURL: https://fixer.io/documentation
+  baseURL: https://api.apilayer.com/fixer
+  tags:
+  - Time Series
+  properties:
+  - type: OpenAPI
+    url: openapi/fixer-time-series-api-openapi.yml
+  - type: Documentation
+    url: https://docs.apilayer.com/fixer/docs/api-documentation
+  - type: APIReference
+    url: https://apilayer.com/marketplace/fixer-api
+  - type: GettingStarted
+    url: https://fixer.io/quickstart
+  - type: Authentication
+    url: https://docs.apilayer.com/fixer/docs/api-documentation
+  - type: JSONSchema
+    url: json-schema/fixer-rates-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-symbols-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-convert-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-timeseries-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-fluctuation-schema.json
+  - type: JSONSchema
+    url: json-schema/fixer-error-schema.json
+  - type: JSONStructure
+    url: json-structure/fixer-rates-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-symbols-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-convert-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-timeseries-structure.json
+  - type: JSONStructure
+    url: json-structure/fixer-fluctuation-structure.json
+  - type: JSONLD
+    url: json-ld/fixer-context.jsonld
+  - type: Examples
+    url: examples/fixer-getsymbols-example.json
+  - type: Examples
+    url: examples/fixer-getlatest-example.json
+  - type: Examples
+    url: examples/fixer-gethistorical-example.json
+  - type: Examples
+    url: examples/fixer-convertcurrency-example.json
+  - type: Examples
+    url: examples/fixer-gettimeseries-example.json
+  - type: Examples
+    url: examples/fixer-getfluctuation-example.json
+  - type: RateLimits
+    url: rate-limits/fixer-rate-limits.yml
+  - type: Pricing
+    url: plans/fixer-plans-pricing.yml
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/fixer/overview
   - type: AgenticAccess
     url: agentic-access/fixer-agentic-access.yml
   - type: DomainSecurity

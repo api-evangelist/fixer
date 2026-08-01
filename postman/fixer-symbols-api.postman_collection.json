@@ -1,0 +1,206 @@
+{
+  "info": {
+    "_postman_id": "bd6a84f4-2645-4e9a-89a8-8d46a25ca730",
+    "name": "Fixer Conversion Symbols API",
+    "description": "Fixer is a lightweight JSON API for real-time and historical foreign exchange\nrates and currency conversion. Sourced primarily from the European Central Bank\nand 15+ other exchange rate data providers, Fixer supports 170+ world currencies.\n\nThe API is delivered via the APILayer marketplace. All requests authenticate via\nan `apikey` HTTP header. The free tier is limited to 100 requests per month and\nis HTTP-only; HTTPS encryption and source-currency switching become available on\nthe Basic plan and above.\n\n\nContact Support:\n Name: Fixer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:40:07.000Z",
+    "updatedAt": "2026-07-28T01:40:08.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bd6a84f4-2645-4e9a-89a8-8d46a25ca730"
+  },
+  "item": [
+    {
+      "name": "symbols",
+      "item": [
+        {
+          "name": "List Supported Currency Symbols",
+          "id": "3a82812a-9f78-443c-b4e8-a956c3f956a5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/symbols",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "symbols"
+              ]
+            },
+            "description": "Returns all currency symbols Fixer supports along with their full names."
+          },
+          "response": [
+            {
+              "id": "85cd649a-9fa6-4f60-a47f-85929a358eeb",
+              "name": "A map of currency codes to currency names.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/symbols",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "symbols"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"symbols\": {\n    \"laborum_8_\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:08.000Z",
+              "updatedAt": "2026-07-28T01:40:08.000Z",
+              "uid": "35240-85cd649a-9fa6-4f60-a47f-85929a358eeb"
+            },
+            {
+              "id": "e1cbdde3-12e7-4920-bdab-957d738d0445",
+              "name": "Missing or invalid `apikey` header.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/symbols",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "symbols"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"info\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:08.000Z",
+              "updatedAt": "2026-07-28T01:40:08.000Z",
+              "uid": "35240-e1cbdde3-12e7-4920-bdab-957d738d0445"
+            },
+            {
+              "id": "f30a3bd9-bdef-4b35-8c62-68f1f2aef144",
+              "name": "Monthly request quota exhausted or per-minute rate limit hit.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/symbols",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "symbols"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"info\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:08.000Z",
+              "updatedAt": "2026-07-28T01:40:08.000Z",
+              "uid": "35240-f30a3bd9-bdef-4b35-8c62-68f1f2aef144"
+            }
+          ],
+          "createdAt": "2026-07-28T01:40:08.000Z",
+          "updatedAt": "2026-07-28T01:40:08.000Z",
+          "uid": "35240-3a82812a-9f78-443c-b4e8-a956c3f956a5"
+        }
+      ],
+      "id": "cd50a8b7-c7ec-4c41-8879-da83d0360098",
+      "createdAt": "2026-07-28T01:40:08.000Z",
+      "updatedAt": "2026-07-28T01:40:08.000Z",
+      "uid": "35240-cd50a8b7-c7ec-4c41-8879-da83d0360098"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.apilayer.com/fixer"
+    }
+  ]
+}

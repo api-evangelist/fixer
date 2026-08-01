@@ -1,0 +1,358 @@
+{
+  "info": {
+    "_postman_id": "b5c15fb2-b522-41a3-bfdc-a28a792e03c9",
+    "name": "Fixer Conversion API",
+    "description": "Fixer is a lightweight JSON API for real-time and historical foreign exchange\nrates and currency conversion. Sourced primarily from the European Central Bank\nand 15+ other exchange rate data providers, Fixer supports 170+ world currencies.\n\nThe API is delivered via the APILayer marketplace. All requests authenticate via\nan `apikey` HTTP header. The free tier is limited to 100 requests per month and\nis HTTP-only; HTTPS encryption and source-currency switching become available on\nthe Basic plan and above.\n\n\nContact Support:\n Name: Fixer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:40:05.000Z",
+    "updatedAt": "2026-07-28T01:40:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b5c15fb2-b522-41a3-bfdc-a28a792e03c9"
+  },
+  "item": [
+    {
+      "name": "convert",
+      "item": [
+        {
+          "name": "Convert Currency Amount",
+          "id": "4d300278-d777-4c46-89f7-432913f10c06",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/convert?from=<string>&to=<string>&amount=<number>&date=<date>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "convert"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Three-letter source currency code (ISO 4217).",
+                  "key": "from",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Three-letter target currency code (ISO 4217).",
+                  "key": "to",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Amount to convert.",
+                  "key": "amount",
+                  "value": "<number>"
+                },
+                {
+                  "description": "Optional historical date (YYYY-MM-DD) to use for the conversion rate.",
+                  "key": "date",
+                  "value": "<date>"
+                }
+              ]
+            },
+            "description": "Converts an amount from one currency to another using real-time or historical\nrates. Available on Basic plan and above.\n"
+          },
+          "response": [
+            {
+              "id": "b5479912-209f-48f6-927f-5e7578dea8b0",
+              "name": "Converted amount and conversion metadata.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/convert?from=<string>&to=<string>&amount=<number>&date=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "convert"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Three-letter source currency code (ISO 4217).",
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Three-letter target currency code (ISO 4217).",
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Amount to convert.",
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "description": "Optional historical date (YYYY-MM-DD) to use for the conversion rate.",
+                      "key": "date",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"query\": {\n    \"from\": \"<string>\",\n    \"to\": \"<string>\",\n    \"amount\": \"<number>\"\n  },\n  \"info\": {\n    \"timestamp\": \"<long>\",\n    \"rate\": \"<number>\"\n  },\n  \"result\": \"<number>\",\n  \"historical\": \"<boolean>\",\n  \"date\": \"<date>\"\n}",
+              "createdAt": "2026-07-28T01:40:06.000Z",
+              "updatedAt": "2026-07-28T01:40:06.000Z",
+              "uid": "35240-b5479912-209f-48f6-927f-5e7578dea8b0"
+            },
+            {
+              "id": "d90591fe-801f-400f-b126-1728abc56a7a",
+              "name": "Missing or invalid `apikey` header.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/convert?from=<string>&to=<string>&amount=<number>&date=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "convert"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Three-letter source currency code (ISO 4217).",
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Three-letter target currency code (ISO 4217).",
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Amount to convert.",
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "description": "Optional historical date (YYYY-MM-DD) to use for the conversion rate.",
+                      "key": "date",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"info\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:06.000Z",
+              "updatedAt": "2026-07-28T01:40:06.000Z",
+              "uid": "35240-d90591fe-801f-400f-b126-1728abc56a7a"
+            },
+            {
+              "id": "09d009dd-76bb-4652-b448-b45e631c6e88",
+              "name": "The requested feature is not included in the current subscription plan.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/convert?from=<string>&to=<string>&amount=<number>&date=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "convert"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Three-letter source currency code (ISO 4217).",
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Three-letter target currency code (ISO 4217).",
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Amount to convert.",
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "description": "Optional historical date (YYYY-MM-DD) to use for the conversion rate.",
+                      "key": "date",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"info\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:06.000Z",
+              "updatedAt": "2026-07-28T01:40:06.000Z",
+              "uid": "35240-09d009dd-76bb-4652-b448-b45e631c6e88"
+            },
+            {
+              "id": "496b0a15-cd69-44c3-9a37-043576eb222a",
+              "name": "Monthly request quota exhausted or per-minute rate limit hit.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/convert?from=<string>&to=<string>&amount=<number>&date=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "convert"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Three-letter source currency code (ISO 4217).",
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Three-letter target currency code (ISO 4217).",
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Amount to convert.",
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "description": "Optional historical date (YYYY-MM-DD) to use for the conversion rate.",
+                      "key": "date",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"info\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:06.000Z",
+              "updatedAt": "2026-07-28T01:40:06.000Z",
+              "uid": "35240-496b0a15-cd69-44c3-9a37-043576eb222a"
+            }
+          ],
+          "createdAt": "2026-07-28T01:40:06.000Z",
+          "updatedAt": "2026-07-28T01:40:06.000Z",
+          "uid": "35240-4d300278-d777-4c46-89f7-432913f10c06"
+        }
+      ],
+      "id": "75948d05-64b1-4c3c-bff3-ccc4257c059e",
+      "createdAt": "2026-07-28T01:40:06.000Z",
+      "updatedAt": "2026-07-28T01:40:06.000Z",
+      "uid": "35240-75948d05-64b1-4c3c-bff3-ccc4257c059e"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.apilayer.com/fixer"
+    }
+  ]
+}

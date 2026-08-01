@@ -1,0 +1,22 @@
+{
+  "provider": "fixer",
+  "sources": [
+    "fixer-conversion-api-openapi.yml",
+    "fixer-fluctuation-api-openapi.yml",
+    "fixer-rates-api-openapi.yml",
+    "fixer-symbols-api-openapi.yml",
+    "fixer-time-series-api-openapi.yml"
+  ],
+  "outputs": [
+    "fixer-conversion-api-openapi.yml",
+    "fixer-fluctuation-api-openapi.yml",
+    "fixer-rates-api-openapi.yml",
+    "fixer-symbols-api-openapi.yml",
+    "fixer-time-series-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

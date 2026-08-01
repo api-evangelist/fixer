@@ -1,0 +1,358 @@
+{
+  "info": {
+    "_postman_id": "821cae94-2dd1-48d5-a072-94ac6ad4d3ee",
+    "name": "Fixer Conversion Fluctuation API",
+    "description": "Fixer is a lightweight JSON API for real-time and historical foreign exchange\nrates and currency conversion. Sourced primarily from the European Central Bank\nand 15+ other exchange rate data providers, Fixer supports 170+ world currencies.\n\nThe API is delivered via the APILayer marketplace. All requests authenticate via\nan `apikey` HTTP header. The free tier is limited to 100 requests per month and\nis HTTP-only; HTTPS encryption and source-currency switching become available on\nthe Basic plan and above.\n\n\nContact Support:\n Name: Fixer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:40:06.000Z",
+    "updatedAt": "2026-07-28T01:40:06.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-821cae94-2dd1-48d5-a072-94ac6ad4d3ee"
+  },
+  "item": [
+    {
+      "name": "fluctuation",
+      "item": [
+        {
+          "name": "Get Fluctuation Data",
+          "id": "596744a9-adf3-4cb4-9a82-7dc962fe0a44",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/fluctuation?start_date=<date>&end_date=<date>&base=<string>&symbols=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fluctuation"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Start date for the fluctuation window (YYYY-MM-DD).",
+                  "key": "start_date",
+                  "value": "<date>"
+                },
+                {
+                  "description": "(Required) End date for the fluctuation window (YYYY-MM-DD).",
+                  "key": "end_date",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                  "key": "base",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                  "key": "symbols",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns fluctuation data (start rate, end rate, change, change_pct) between two\ndates for any supported currency pair. Available on Professional Plus and above.\n"
+          },
+          "response": [
+            {
+              "id": "639778f6-8618-45ff-904c-5b4ee724aae7",
+              "name": "Per-currency fluctuation summary for the requested window.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/fluctuation?start_date=<date>&end_date=<date>&base=<string>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fluctuation"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Start date for the fluctuation window (YYYY-MM-DD).",
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) End date for the fluctuation window (YYYY-MM-DD).",
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"fluctuation\": \"<boolean>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"base\": \"<string>\",\n  \"rates\": {\n    \"laborum_294\": {\n      \"start_rate\": \"<number>\",\n      \"end_rate\": \"<number>\",\n      \"change\": \"<number>\",\n      \"change_pct\": \"<number>\"\n    },\n    \"culpa9a\": {\n      \"start_rate\": \"<number>\",\n      \"end_rate\": \"<number>\",\n      \"change\": \"<number>\",\n      \"change_pct\": \"<number>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:40:06.000Z",
+              "updatedAt": "2026-07-28T01:40:06.000Z",
+              "uid": "35240-639778f6-8618-45ff-904c-5b4ee724aae7"
+            },
+            {
+              "id": "b12f7a50-2294-425c-b634-f785b006683e",
+              "name": "Missing or invalid `apikey` header.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/fluctuation?start_date=<date>&end_date=<date>&base=<string>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fluctuation"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Start date for the fluctuation window (YYYY-MM-DD).",
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) End date for the fluctuation window (YYYY-MM-DD).",
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"info\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:06.000Z",
+              "updatedAt": "2026-07-28T01:40:06.000Z",
+              "uid": "35240-b12f7a50-2294-425c-b634-f785b006683e"
+            },
+            {
+              "id": "792a0f00-431f-4e09-9977-573ad4c6e346",
+              "name": "The requested feature is not included in the current subscription plan.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/fluctuation?start_date=<date>&end_date=<date>&base=<string>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fluctuation"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Start date for the fluctuation window (YYYY-MM-DD).",
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) End date for the fluctuation window (YYYY-MM-DD).",
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"info\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:06.000Z",
+              "updatedAt": "2026-07-28T01:40:06.000Z",
+              "uid": "35240-792a0f00-431f-4e09-9977-573ad4c6e346"
+            },
+            {
+              "id": "1ba1f383-0a6a-4364-ae7e-4bb09a658059",
+              "name": "Monthly request quota exhausted or per-minute rate limit hit.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/fluctuation?start_date=<date>&end_date=<date>&base=<string>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fluctuation"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Start date for the fluctuation window (YYYY-MM-DD).",
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) End date for the fluctuation window (YYYY-MM-DD).",
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"info\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:06.000Z",
+              "updatedAt": "2026-07-28T01:40:06.000Z",
+              "uid": "35240-1ba1f383-0a6a-4364-ae7e-4bb09a658059"
+            }
+          ],
+          "createdAt": "2026-07-28T01:40:06.000Z",
+          "updatedAt": "2026-07-28T01:40:06.000Z",
+          "uid": "35240-596744a9-adf3-4cb4-9a82-7dc962fe0a44"
+        }
+      ],
+      "id": "2a15f453-7b75-4a71-bd0a-e30645f8a070",
+      "createdAt": "2026-07-28T01:40:06.000Z",
+      "updatedAt": "2026-07-28T01:40:06.000Z",
+      "uid": "35240-2a15f453-7b75-4a71-bd0a-e30645f8a070"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.apilayer.com/fixer"
+    }
+  ]
+}

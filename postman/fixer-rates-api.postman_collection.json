@@ -1,0 +1,545 @@
+{
+  "info": {
+    "_postman_id": "77516939-32e5-4b67-9c73-ec495cfff792",
+    "name": "Fixer Conversion Rates API",
+    "description": "Fixer is a lightweight JSON API for real-time and historical foreign exchange\nrates and currency conversion. Sourced primarily from the European Central Bank\nand 15+ other exchange rate data providers, Fixer supports 170+ world currencies.\n\nThe API is delivered via the APILayer marketplace. All requests authenticate via\nan `apikey` HTTP header. The free tier is limited to 100 requests per month and\nis HTTP-only; HTTPS encryption and source-currency switching become available on\nthe Basic plan and above.\n\n\nContact Support:\n Name: Fixer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:40:07.000Z",
+    "updatedAt": "2026-07-28T01:40:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-77516939-32e5-4b67-9c73-ec495cfff792"
+  },
+  "item": [
+    {
+      "name": "latest",
+      "item": [
+        {
+          "name": "Get Latest Exchange Rates",
+          "id": "b2de649e-4ad4-40df-a819-6bad8dc62806",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/latest?base=<string>&symbols=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "latest"
+              ],
+              "query": [
+                {
+                  "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                  "key": "base",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                  "key": "symbols",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns the most recent exchange rate data. Rates update hourly on the Free and\nBasic tiers, every 10 minutes on Professional, and every 60 seconds on\nProfessional Plus and Enterprise.\n"
+          },
+          "response": [
+            {
+              "id": "3a494d14-3aab-4c64-8b0e-d6e0885146f4",
+              "name": "Latest rates anchored to the requested base currency.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/latest?base=<string>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "latest"
+                  ],
+                  "query": [
+                    {
+                      "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"timestamp\": \"<long>\",\n  \"base\": \"<string>\",\n  \"date\": \"<date>\",\n  \"rates\": {\n    \"irure__\": \"<number>\"\n  },\n  \"historical\": \"<boolean>\"\n}",
+              "createdAt": "2026-07-28T01:40:07.000Z",
+              "updatedAt": "2026-07-28T01:40:07.000Z",
+              "uid": "35240-3a494d14-3aab-4c64-8b0e-d6e0885146f4"
+            },
+            {
+              "id": "a124736b-a11d-4543-bd1e-c01616332e39",
+              "name": "Missing or invalid `apikey` header.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/latest?base=<string>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "latest"
+                  ],
+                  "query": [
+                    {
+                      "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"info\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:07.000Z",
+              "updatedAt": "2026-07-28T01:40:07.000Z",
+              "uid": "35240-a124736b-a11d-4543-bd1e-c01616332e39"
+            },
+            {
+              "id": "54f2a7a6-a05d-48f5-8752-9a1a36badec3",
+              "name": "The requested feature is not included in the current subscription plan.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/latest?base=<string>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "latest"
+                  ],
+                  "query": [
+                    {
+                      "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"info\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:07.000Z",
+              "updatedAt": "2026-07-28T01:40:07.000Z",
+              "uid": "35240-54f2a7a6-a05d-48f5-8752-9a1a36badec3"
+            },
+            {
+              "id": "b57441ff-2c6f-4a74-999a-ccb04fefe22c",
+              "name": "Monthly request quota exhausted or per-minute rate limit hit.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/latest?base=<string>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "latest"
+                  ],
+                  "query": [
+                    {
+                      "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"info\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:07.000Z",
+              "updatedAt": "2026-07-28T01:40:07.000Z",
+              "uid": "35240-b57441ff-2c6f-4a74-999a-ccb04fefe22c"
+            }
+          ],
+          "createdAt": "2026-07-28T01:40:07.000Z",
+          "updatedAt": "2026-07-28T01:40:07.000Z",
+          "uid": "35240-b2de649e-4ad4-40df-a819-6bad8dc62806"
+        }
+      ],
+      "id": "8ea0e1a1-012f-4a2c-ad17-e89f95605683",
+      "createdAt": "2026-07-28T01:40:07.000Z",
+      "updatedAt": "2026-07-28T01:40:07.000Z",
+      "uid": "35240-8ea0e1a1-012f-4a2c-ad17-e89f95605683"
+    },
+    {
+      "name": "{date}",
+      "item": [
+        {
+          "name": "Get Historical Exchange Rates",
+          "id": "eb8b757c-18c2-4f9a-b3fa-897c120435ad",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/:date?base=<string>&symbols=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ":date"
+              ],
+              "query": [
+                {
+                  "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                  "key": "base",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                  "key": "symbols",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "id": "d1e91096-5b64-4e70-ad54-69976f8646dd",
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "(Required) ISO-8601 date in `YYYY-MM-DD` format (any working day since 1999-01-04)."
+                }
+              ]
+            },
+            "description": "Returns end-of-day historical exchange rates for any date since 1999. Historical\ndata is available on all plans, including Free.\n"
+          },
+          "response": [
+            {
+              "id": "652c6377-d44e-4d23-bc5d-0f41caab4079",
+              "name": "Historical end-of-day rates for the requested date.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:date?base=<string>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":date"
+                  ],
+                  "query": [
+                    {
+                      "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "date"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"timestamp\": \"<long>\",\n  \"base\": \"<string>\",\n  \"date\": \"<date>\",\n  \"rates\": {\n    \"irure__\": \"<number>\"\n  },\n  \"historical\": \"<boolean>\"\n}",
+              "createdAt": "2026-07-28T01:40:07.000Z",
+              "updatedAt": "2026-07-28T01:40:07.000Z",
+              "uid": "35240-652c6377-d44e-4d23-bc5d-0f41caab4079"
+            },
+            {
+              "id": "eb924c2f-f440-4115-918b-feb20541438d",
+              "name": "Missing or invalid `apikey` header.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:date?base=<string>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":date"
+                  ],
+                  "query": [
+                    {
+                      "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "date"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"info\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:07.000Z",
+              "updatedAt": "2026-07-28T01:40:07.000Z",
+              "uid": "35240-eb924c2f-f440-4115-918b-feb20541438d"
+            },
+            {
+              "id": "38f09f54-8b1e-4e95-9582-4b2024068243",
+              "name": "Monthly request quota exhausted or per-minute rate limit hit.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:date?base=<string>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":date"
+                  ],
+                  "query": [
+                    {
+                      "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of ISO 4217 currency codes to limit the result set.",
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "date"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"info\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:40:07.000Z",
+              "updatedAt": "2026-07-28T01:40:07.000Z",
+              "uid": "35240-38f09f54-8b1e-4e95-9582-4b2024068243"
+            }
+          ],
+          "createdAt": "2026-07-28T01:40:07.000Z",
+          "updatedAt": "2026-07-28T01:40:07.000Z",
+          "uid": "35240-eb8b757c-18c2-4f9a-b3fa-897c120435ad"
+        }
+      ],
+      "id": "ee3a75ba-f0a8-4eeb-a4c0-d5933a254810",
+      "createdAt": "2026-07-28T01:40:07.000Z",
+      "updatedAt": "2026-07-28T01:40:07.000Z",
+      "uid": "35240-ee3a75ba-f0a8-4eeb-a4c0-d5933a254810"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.apilayer.com/fixer"
+    }
+  ]
+}

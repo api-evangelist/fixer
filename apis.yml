@@ -332,6 +332,9 @@ apis:
   - type: Pricing
     url: plans/fixer-plans-pricing.yml
 common:
+  - type: License
+    name: MIT
+    url: https://github.com/apilayer/fixer/blob/master/LICENSE
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/fixer/overview
   - type: AgenticAccess

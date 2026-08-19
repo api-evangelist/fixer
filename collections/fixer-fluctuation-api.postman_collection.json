@@ -1,0 +1,349 @@
+{
+  "item": [
+    {
+      "id": "ac23f821-861a-43da-8f45-1a708e9fbcde",
+      "name": "Fluctuation",
+      "description": {
+        "content": "Currency fluctuation analysis between two dates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b3933818-1873-4f25-8b9c-4200588b462e",
+          "name": "Get Fluctuation Data",
+          "request": {
+            "name": "Get Fluctuation Data",
+            "description": {
+              "content": "Returns fluctuation data (start rate, end rate, change, change_pct) between two\ndates for any supported currency pair. Available on Professional Plus and above.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fluctuation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) Start date for the fluctuation window (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) End date for the fluctuation window (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "base",
+                  "value": "<string>",
+                  "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "Comma-separated list of ISO 4217 currency codes to limit the result set."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4461be2d-63d7-4555-9ee6-e1f3aa07d2ad",
+              "name": "Per-currency fluctuation summary for the requested window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fluctuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2018-02-25"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2018-02-26"
+                    },
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"fluctuation\": true,\n  \"start_date\": \"2018-02-25\",\n  \"end_date\": \"2018-02-26\",\n  \"base\": \"EUR\",\n  \"rates\": {\n    \"USD\": {\n      \"start_rate\": 1.228952,\n      \"end_rate\": 1.232735,\n      \"change\": 0.0038,\n      \"change_pct\": 0.3078\n    },\n    \"JPY\": {\n      \"start_rate\": 131.587611,\n      \"end_rate\": 131.651142,\n      \"change\": 0.0635,\n      \"change_pct\": 0.0483\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "454e598a-9db9-46f0-adf6-48ff05d5f4b4",
+              "name": "Missing or invalid `apikey` header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fluctuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2018-02-25"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2018-02-26"
+                    },
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e0f11ee-0a5e-4303-819b-0231a26957e1",
+              "name": "The requested feature is not included in the current subscription plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fluctuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2018-02-25"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2018-02-26"
+                    },
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1a9e01f-fbd5-4d53-882c-cc592efab72c",
+              "name": "Monthly request quota exhausted or per-minute rate limit hit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fluctuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2018-02-25"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2018-02-26"
+                    },
+                    {
+                      "key": "base",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "USD,AUD,CAD,PLN,MXN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": 104,\n    \"type\": \"monthly_limit_reached\",\n    \"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.apilayer.com/fixer",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d9b717ae-61a0-4d79-a0fb-f3edeeff7629",
+    "name": "Fixer Conversion Fluctuation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Fixer is a lightweight JSON API for real-time and historical foreign exchange\nrates and currency conversion. Sourced primarily from the European Central Bank\nand 15+ other exchange rate data providers, Fixer supports 170+ world currencies.\n\nThe API is delivered via the APILayer marketplace. All requests authenticate via\nan `apikey` HTTP header. The free tier is limited to 100 requests per month and\nis HTTP-only; HTTPS encryption and source-currency switching become available on\nthe Basic plan and above.\n\n\nContact Support:\n Name: Fixer Support",
+      "type": "text/plain"
+    }
+  }
+}

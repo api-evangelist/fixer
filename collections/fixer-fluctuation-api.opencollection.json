@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixer Conversion Fluctuation API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fluctuation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Fluctuation Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apilayer.com/fixer/fluctuation",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the fluctuation window (YYYY-MM-DD)."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date for the fluctuation window (YYYY-MM-DD)."
+              },
+              {
+                "name": "base",
+                "value": "",
+                "type": "query",
+                "description": "Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;\nany base currency may be selected on Basic plan and above.\n"
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ISO 4217 currency codes to limit the result set."
+              }
+            ]
+          },
+          "docs": "Returns fluctuation data (start rate, end rate, change, change_pct) between two\ndates for any supported currency pair. Available on Professional Plus and above.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

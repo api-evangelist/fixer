@@ -1,11 +1,7 @@
 {
   "provider": "fixer",
   "sources": [
-    "fixer-conversion-api-openapi.yml",
-    "fixer-fluctuation-api-openapi.yml",
-    "fixer-rates-api-openapi.yml",
-    "fixer-symbols-api-openapi.yml",
-    "fixer-time-series-api-openapi.yml"
+    "_original/fixer-openapi.yml"
   ],
   "outputs": [
     "fixer-conversion-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "fixer-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "fixer-conversion-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fixer-fluctuation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fixer-rates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fixer-symbols-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fixer-time-series-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

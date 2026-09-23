@@ -1,22 +1,9 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Fixer Conversion Symbols API
+  title: Fixer Symbols API
   description: 'Fixer is a lightweight JSON API for real-time and historical foreign exchange
 
-    rates and currency conversion. Sourced primarily from the European Central Bank
-
-    and 15+ other exchange rate data providers, Fixer supports 170+ world currencies.
-
-
-    The API is delivered via the APILayer marketplace. All requests authenticate via
-
-    an `apikey` HTTP header. The free tier is limited to 100 requests per month and
-
-    is HTTP-only; HTTPS encryption and source-currency switching become available on
-
-    the Basic plan and above.
-
-    '
+    rates and currency conversion.'
   version: 1.0.0
   contact:
     name: Fixer Support

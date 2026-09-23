@@ -1,22 +1,9 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Fixer Conversion Time Series API
+  title: Fixer Time Series API
   description: 'Fixer is a lightweight JSON API for real-time and historical foreign exchange
 
-    rates and currency conversion. Sourced primarily from the European Central Bank
-
-    and 15+ other exchange rate data providers, Fixer supports 170+ world currencies.
-
-
-    The API is delivered via the APILayer marketplace. All requests authenticate via
-
-    an `apikey` HTTP header. The free tier is limited to 100 requests per month and
-
-    is HTTP-only; HTTPS encryption and source-currency switching become available on
-
-    the Basic plan and above.
-
-    '
+    rates and currency conversion.'
   version: 1.0.0
   contact:
     name: Fixer Support
@@ -46,9 +33,7 @@ paths:
       summary: Get Time Series Exchange Rates
       description: 'Returns daily historical exchange rates between two dates of your choice,
 
-        with a maximum range of 365 days. Available on Professional plan and above.
-
-        '
+        with a maximum range of 365 days. Available on Professional plan and above.'
       tags:
       - Time Series
       parameters:
@@ -84,25 +69,6 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    RateLimited:
-      description: Monthly request quota exhausted or per-minute rate limit hit.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Missing or invalid `apikey` header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: The requested feature is not included in the current subscription plan.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     TimeSeriesResponse:
       type: object
@@ -168,14 +134,6 @@ components:
               type: string
               example: Your monthly API request volume has been reached. Please upgrade your plan.
   parameters:
-    Symbols:
-      name: symbols
-      in: query
-      required: false
-      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
-      schema:
-        type: string
-        example: USD,AUD,CAD,PLN,MXN
     Base:
       name: base
       in: query
@@ -188,6 +146,33 @@ components:
       schema:
         type: string
         example: USD
+    Symbols:
+      name: symbols
+      in: query
+      required: false
+      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
+      schema:
+        type: string
+        example: USD,AUD,CAD,PLN,MXN
+  responses:
+    Forbidden:
+      description: The requested feature is not included in the current subscription plan.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid `apikey` header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: Monthly request quota exhausted or per-minute rate limit hit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

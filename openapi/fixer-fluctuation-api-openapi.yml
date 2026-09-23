@@ -1,22 +1,9 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Fixer Conversion Fluctuation API
+  title: Fixer Fluctuation API
   description: 'Fixer is a lightweight JSON API for real-time and historical foreign exchange
 
-    rates and currency conversion. Sourced primarily from the European Central Bank
-
-    and 15+ other exchange rate data providers, Fixer supports 170+ world currencies.
-
-
-    The API is delivered via the APILayer marketplace. All requests authenticate via
-
-    an `apikey` HTTP header. The free tier is limited to 100 requests per month and
-
-    is HTTP-only; HTTPS encryption and source-currency switching become available on
-
-    the Basic plan and above.
-
-    '
+    rates and currency conversion.'
   version: 1.0.0
   contact:
     name: Fixer Support
@@ -46,9 +33,7 @@ paths:
       summary: Get Fluctuation Data
       description: 'Returns fluctuation data (start rate, end rate, change, change_pct) between two
 
-        dates for any supported currency pair. Available on Professional Plus and above.
-
-        '
+        dates for any supported currency pair. Available on Professional Plus and above.'
       tags:
       - Fluctuation
       parameters:
@@ -84,37 +69,7 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    RateLimited:
-      description: Monthly request quota exhausted or per-minute rate limit hit.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Missing or invalid `apikey` header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: The requested feature is not included in the current subscription plan.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    FluctuationEntry:
-      type: object
-      properties:
-        start_rate:
-          type: number
-        end_rate:
-          type: number
-        change:
-          type: number
-        change_pct:
-          type: number
     FluctuationResponse:
       type: object
       required:
@@ -178,15 +133,18 @@ components:
             info:
               type: string
               example: Your monthly API request volume has been reached. Please upgrade your plan.
+    FluctuationEntry:
+      type: object
+      properties:
+        start_rate:
+          type: number
+        end_rate:
+          type: number
+        change:
+          type: number
+        change_pct:
+          type: number
   parameters:
-    Symbols:
-      name: symbols
-      in: query
-      required: false
-      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
-      schema:
-        type: string
-        example: USD,AUD,CAD,PLN,MXN
     Base:
       name: base
       in: query
@@ -199,6 +157,33 @@ components:
       schema:
         type: string
         example: USD
+    Symbols:
+      name: symbols
+      in: query
+      required: false
+      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
+      schema:
+        type: string
+        example: USD,AUD,CAD,PLN,MXN
+  responses:
+    Forbidden:
+      description: The requested feature is not included in the current subscription plan.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid `apikey` header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: Monthly request quota exhausted or per-minute rate limit hit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

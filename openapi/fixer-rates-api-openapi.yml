@@ -143,6 +143,14 @@ components:
               type: string
               example: Your monthly API request volume has been reached. Please upgrade your plan.
   parameters:
+    Symbols:
+      name: symbols
+      in: query
+      required: false
+      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
+      schema:
+        type: string
+        example: USD,AUD,CAD,PLN,MXN
     Base:
       name: base
       in: query
@@ -155,15 +163,13 @@ components:
       schema:
         type: string
         example: USD
-    Symbols:
-      name: symbols
-      in: query
-      required: false
-      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
-      schema:
-        type: string
-        example: USD,AUD,CAD,PLN,MXN
   responses:
+    RateLimited:
+      description: Monthly request quota exhausted or per-minute rate limit hit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: The requested feature is not included in the current subscription plan.
       content:
@@ -172,12 +178,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing or invalid `apikey` header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    RateLimited:
-      description: Monthly request quota exhausted or per-minute rate limit hit.
       content:
         application/json:
           schema:

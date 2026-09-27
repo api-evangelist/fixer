@@ -60,23 +60,6 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    SymbolsResponse:
-      type: object
-      required:
-      - success
-      - symbols
-      properties:
-        success:
-          type: boolean
-          example: true
-        symbols:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            AED: United Arab Emirates Dirham
-            AFN: Afghan Afghani
-            ALL: Albanian Lek
     ErrorResponse:
       type: object
       required:
@@ -98,6 +81,23 @@ components:
             info:
               type: string
               example: Your monthly API request volume has been reached. Please upgrade your plan.
+    SymbolsResponse:
+      type: object
+      required:
+      - success
+      - symbols
+      properties:
+        success:
+          type: boolean
+          example: true
+        symbols:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            AED: United Arab Emirates Dirham
+            AFN: Afghan Afghani
+            ALL: Albanian Lek
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

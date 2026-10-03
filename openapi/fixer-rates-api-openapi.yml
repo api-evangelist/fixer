@@ -86,7 +86,68 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  responses:
+    Forbidden:
+      description: The requested feature is not included in the current subscription plan.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: Monthly request quota exhausted or per-minute rate limit hit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid `apikey` header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    Base:
+      name: base
+      in: query
+      required: false
+      description: 'Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;
+
+        any base currency may be selected on Basic plan and above.
+
+        '
+      schema:
+        type: string
+        example: USD
+    Symbols:
+      name: symbols
+      in: query
+      required: false
+      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
+      schema:
+        type: string
+        example: USD,AUD,CAD,PLN,MXN
   schemas:
+    ErrorResponse:
+      type: object
+      required:
+      - success
+      - error
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              example: 104
+            type:
+              type: string
+              example: monthly_limit_reached
+            info:
+              type: string
+              example: Your monthly API request volume has been reached. Please upgrade your plan.
     RatesResponse:
       type: object
       required:
@@ -121,67 +182,6 @@ components:
             USD: 1.23396
             AUD: 1.566015
             CAD: 1.560132
-    ErrorResponse:
-      type: object
-      required:
-      - success
-      - error
-      properties:
-        success:
-          type: boolean
-          example: false
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              example: 104
-            type:
-              type: string
-              example: monthly_limit_reached
-            info:
-              type: string
-              example: Your monthly API request volume has been reached. Please upgrade your plan.
-  parameters:
-    Symbols:
-      name: symbols
-      in: query
-      required: false
-      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
-      schema:
-        type: string
-        example: USD,AUD,CAD,PLN,MXN
-    Base:
-      name: base
-      in: query
-      required: false
-      description: 'Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;
-
-        any base currency may be selected on Basic plan and above.
-
-        '
-      schema:
-        type: string
-        example: USD
-  responses:
-    RateLimited:
-      description: Monthly request quota exhausted or per-minute rate limit hit.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: The requested feature is not included in the current subscription plan.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Missing or invalid `apikey` header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

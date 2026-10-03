@@ -69,27 +69,6 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  parameters:
-    Symbols:
-      name: symbols
-      in: query
-      required: false
-      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
-      schema:
-        type: string
-        example: USD,AUD,CAD,PLN,MXN
-    Base:
-      name: base
-      in: query
-      required: false
-      description: 'Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;
-
-        any base currency may be selected on Basic plan and above.
-
-        '
-      schema:
-        type: string
-        example: USD
   schemas:
     FluctuationResponse:
       type: object
@@ -166,14 +145,14 @@ components:
               type: string
               example: Your monthly API request volume has been reached. Please upgrade your plan.
   responses:
-    RateLimited:
-      description: Monthly request quota exhausted or per-minute rate limit hit.
+    Forbidden:
+      description: The requested feature is not included in the current subscription plan.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: The requested feature is not included in the current subscription plan.
+    RateLimited:
+      description: Monthly request quota exhausted or per-minute rate limit hit.
       content:
         application/json:
           schema:
@@ -184,6 +163,27 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    Base:
+      name: base
+      in: query
+      required: false
+      description: 'Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;
+
+        any base currency may be selected on Basic plan and above.
+
+        '
+      schema:
+        type: string
+        example: USD
+    Symbols:
+      name: symbols
+      in: query
+      required: false
+      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
+      schema:
+        type: string
+        example: USD,AUD,CAD,PLN,MXN
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

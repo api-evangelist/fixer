@@ -81,14 +81,14 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   responses:
-    RateLimited:
-      description: Monthly request quota exhausted or per-minute rate limit hit.
+    Forbidden:
+      description: The requested feature is not included in the current subscription plan.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: The requested feature is not included in the current subscription plan.
+    RateLimited:
+      description: Monthly request quota exhausted or per-minute rate limit hit.
       content:
         application/json:
           schema:

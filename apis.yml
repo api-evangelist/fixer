@@ -43,6 +43,9 @@ x-tier: 3
 x-tier-reason: bulk-registered-from-public-apis
 x-parent: apilayer
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fixer.png
+x-docs-platform: stoplight
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
 tags:
   - Currency Exchange
   - Foreign Exchange

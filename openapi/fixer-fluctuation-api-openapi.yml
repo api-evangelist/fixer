@@ -69,7 +69,58 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid `apikey` header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The requested feature is not included in the current subscription plan.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: Monthly request quota exhausted or per-minute rate limit hit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    Base:
+      name: base
+      in: query
+      required: false
+      description: 'Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;
+
+        any base currency may be selected on Basic plan and above.
+
+        '
+      schema:
+        type: string
+        example: USD
+    Symbols:
+      name: symbols
+      in: query
+      required: false
+      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
+      schema:
+        type: string
+        example: USD,AUD,CAD,PLN,MXN
   schemas:
+    FluctuationEntry:
+      type: object
+      properties:
+        start_rate:
+          type: number
+        end_rate:
+          type: number
+        change:
+          type: number
+        change_pct:
+          type: number
     FluctuationResponse:
       type: object
       required:
@@ -112,17 +163,6 @@ components:
               end_rate: 131.651142
               change: 0.0635
               change_pct: 0.0483
-    FluctuationEntry:
-      type: object
-      properties:
-        start_rate:
-          type: number
-        end_rate:
-          type: number
-        change:
-          type: number
-        change_pct:
-          type: number
     ErrorResponse:
       type: object
       required:
@@ -144,46 +184,6 @@ components:
             info:
               type: string
               example: Your monthly API request volume has been reached. Please upgrade your plan.
-  responses:
-    Forbidden:
-      description: The requested feature is not included in the current subscription plan.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    RateLimited:
-      description: Monthly request quota exhausted or per-minute rate limit hit.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Missing or invalid `apikey` header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    Base:
-      name: base
-      in: query
-      required: false
-      description: 'Three-letter ISO 4217 base currency code. Defaults to EUR on the Free plan;
-
-        any base currency may be selected on Basic plan and above.
-
-        '
-      schema:
-        type: string
-        example: USD
-    Symbols:
-      name: symbols
-      in: query
-      required: false
-      description: Comma-separated list of ISO 4217 currency codes to limit the result set.
-      schema:
-        type: string
-        example: USD,AUD,CAD,PLN,MXN
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

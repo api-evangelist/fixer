@@ -1,3 +1,8 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (dated 2026-05-29 by the file itself), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
+generated: '2026-05-29'
 name: Fixer Plans and Pricing
 description: |
   Commercial plan surface for the Fixer foreign exchange API, captured against the
@@ -200,3 +205,41 @@ featureCatalog:
     label: Dedicated Account Team
   - id: priority-support
     label: Priority Support
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - metered
+  units: []
+  plans:
+  - name: Free
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods: []
+  - name: Basic
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Professional
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Professional Plus
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods: []

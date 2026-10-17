@@ -69,25 +69,6 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid `apikey` header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: The requested feature is not included in the current subscription plan.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    RateLimited:
-      description: Monthly request quota exhausted or per-minute rate limit hit.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     Base:
       name: base
@@ -109,7 +90,47 @@ components:
       schema:
         type: string
         example: USD,AUD,CAD,PLN,MXN
+  responses:
+    Forbidden:
+      description: The requested feature is not included in the current subscription plan.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid `apikey` header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: Monthly request quota exhausted or per-minute rate limit hit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      required:
+      - success
+      - error
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              example: 104
+            type:
+              type: string
+              example: monthly_limit_reached
+            info:
+              type: string
+              example: Your monthly API request volume has been reached. Please upgrade your plan.
     TimeSeriesResponse:
       type: object
       required:
@@ -152,27 +173,6 @@ components:
               USD: 1.315066
               AUD: 1.274202
               CAD: 1.299083
-    ErrorResponse:
-      type: object
-      required:
-      - success
-      - error
-      properties:
-        success:
-          type: boolean
-          example: false
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              example: 104
-            type:
-              type: string
-              example: monthly_limit_reached
-            info:
-              type: string
-              example: Your monthly API request volume has been reached. Please upgrade your plan.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

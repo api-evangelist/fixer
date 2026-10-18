@@ -47,6 +47,15 @@ x-docs-platform: stoplight
 x-docs-platform-confidence: medium
 x-docs-platform-checked: 2026-10-03
 tags:
+  - Foreign Exchange
+  - ECB
+  - Conversion
+  - Historical Rates
+  - Time Series
+  - Fluctuation
+  - APILayer
+  - Public APIs
+tags_raw:
   - Currency Exchange
   - Foreign Exchange
   - FX

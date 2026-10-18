@@ -29,3 +29,38 @@
     builder: Pipedream repo (component)
   status: not-a-workflow
   arazzo: null
+- slug: fixer-meltano
+  label: Meltano
+  partner: meltano
+  partner_name: Meltano
+  type: marketplace
+  marketplace: meltano-hub
+  channel: elt-connector
+  evidence: https://hub.meltano.com/extractors/tap-fixerio--ebunt
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Meltano Hub (github.com/meltano/hub _data/meltano extractors + loaders)
+    spec_file: null
+    role: elt-connector:meltano-hub
+    registered_name: Fixer
+    matched_domain: fixer.io
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    plugins:
+    - tap-fixerio--ebunt
+    - tap-fixerio--einartg
+    - tap-fixerio--haaspt
+    - tap-fixerio--lpillmann
+    - tap-fixerio--singer-io
+    maintenance_status:
+    - inactive
+    - unknown
+    quality:
+    - bronze
+    - unknown
+    builder: 'community (Meltano Hub variant maintainers: ebunt, einartg, haaspt, lpillmann, singer-io)'
+  status: pending-partner-spec
+  arazzo: null

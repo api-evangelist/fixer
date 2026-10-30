@@ -1,4 +1,4 @@
-# Fixer (fixer)
+# Fixer
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,98 +66,187 @@
 
 Fixer is a lightweight JSON API for real-time and historical foreign exchange rates and currency conversion. Built on top of European Central Bank reference rates and 15+ additional data sources, Fixer supports 170+ world currencies and is delivered through the APILayer marketplace under a freemium subscription model.
 
-**APIs.json:** [https://fixer.io](https://fixer.io)
+**Areas:** Foreign Exchange · ECB · Conversion · Historical Rates · Time Series · Fluctuation · APILayer · Public APIs
 
-## Tags
+## Fixer on APIs.io
 
-- Currency Exchange
-- Foreign Exchange
-- FX
-- Forex
-- ECB
-- Conversion
-- Historical Rates
-- Time Series
-- Fluctuation
-- APILayer
-- Public APIs
+Everything profiled for Fixer is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/fixer/](https://apis.io/providers/fixer/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-05-28
-- **Modified:** 2026-05-29
+- [Fixer Conversion API](https://apis.io/apis/fixer/fixer-conversion-api/) — On-demand currency amount conversion.
+- [Fixer Fluctuation API](https://apis.io/apis/fixer/fixer-fluctuation-api/) — Currency fluctuation analysis between two dates.
+- [Fixer Rates API](https://apis.io/apis/fixer/fixer-rates-api/) — Real-time and historical foreign exchange rate operations.
+- [Fixer Symbols API](https://apis.io/apis/fixer/fixer-symbols-api/) — Discovery of supported currency symbols.
+- [Fixer Time Series API](https://apis.io/apis/fixer/fixer-time-series-api/) — Daily historical rates between two dates.
 
-## APIs
+### Published properties
 
-### Fixer API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The Fixer REST API exposes six operations covering symbol discovery, real-time and historical rates, on-demand currency conversion, daily time-series, and fluctuation reporting. Authentication is via the APILayer `apikey` header.
+#### Agentic access (1)
 
-- **Human URL:** [https://fixer.io/documentation](https://fixer.io/documentation)
-- **Base URL:** `https://api.apilayer.com/fixer`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Fixer Agentic Access](https://apis.io/agentic-access/fixer/fixer-agentic-access/)
 
-- Currency Exchange
-- Foreign Exchange
-- APILayer
+#### JSON Schema (6)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://docs.apilayer.com/fixer/docs/api-documentation)
-- [API Reference](https://apilayer.com/marketplace/fixer-api)
-- [Quickstart](https://fixer.io/quickstart)
-- [Authentication](https://docs.apilayer.com/fixer/docs/api-documentation)
-- [OpenAPI](openapi/fixer-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/fixer.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fixer.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/fixer-rates-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/fixer-symbols-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/fixer-convert-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/fixer-timeseries-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/fixer-fluctuation-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/fixer-error-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/fixer-rates-structure.json)
-- [JSON Structure](json-structure/fixer-symbols-structure.json)
-- [JSON Structure](json-structure/fixer-convert-structure.json)
-- [JSON Structure](json-structure/fixer-timeseries-structure.json)
-- [JSON Structure](json-structure/fixer-fluctuation-structure.json)
-- [J S O N- L D](json-ld/fixer-context.jsonld)
-- [Example](examples/fixer-getsymbols-example.json)
-- [Example](examples/fixer-getlatest-example.json)
-- [Example](examples/fixer-gethistorical-example.json)
-- [Example](examples/fixer-convertcurrency-example.json)
-- [Example](examples/fixer-gettimeseries-example.json)
-- [Example](examples/fixer-getfluctuation-example.json)
-- [Rate Limits](rate-limits/fixer-rate-limits.yml)
-- [Pricing](plans/fixer-plans-pricing.yml)
+- [Fixer Convert Response](https://apis.io/schemas/fixer/fixer-convert/)
+- [Fixer Error Response](https://apis.io/schemas/fixer/fixer-error/)
+- [Fixer Fluctuation Response](https://apis.io/schemas/fixer/fixer-fluctuation/)
+- [Fixer Rates Response](https://apis.io/schemas/fixer/fixer-rates/)
+- [Fixer Symbols Response](https://apis.io/schemas/fixer/fixer-symbols/)
+- [Fixer Time Series Response](https://apis.io/schemas/fixer/fixer-timeseries/)
 
-## Common Properties
+#### JSON Structure (5)
+
+Data models expressed in JSON Structure.
+
+- [Fixer Convert Structure](https://apis.io/json-structure/fixer/fixer-convert-structure/)
+- [Fixer Fluctuation Structure](https://apis.io/json-structure/fixer/fixer-fluctuation-structure/)
+- [Fixer Rates Structure](https://apis.io/json-structure/fixer/fixer-rates-structure/)
+- [Fixer Symbols Structure](https://apis.io/json-structure/fixer/fixer-symbols-structure/)
+- [Fixer Timeseries Structure](https://apis.io/json-structure/fixer/fixer-timeseries-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Fixer Context](https://apis.io/jsonld/fixer/fixer-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Fixer Vocabulary](https://apis.io/vocabularies/fixer/fixer-vocabulary/)
+
+#### Examples (6)
+
+Example requests and responses.
+
+- [Fixer Convertcurrency Example](https://apis.io/examples/fixer/fixer-convertcurrency-example/)
+- [Fixer Getfluctuation Example](https://apis.io/examples/fixer/fixer-getfluctuation-example/)
+- [Fixer Gethistorical Example](https://apis.io/examples/fixer/fixer-gethistorical-example/)
+- [Fixer Getlatest Example](https://apis.io/examples/fixer/fixer-getlatest-example/)
+- [Fixer Getsymbols Example](https://apis.io/examples/fixer/fixer-getsymbols-example/)
+- [Fixer Gettimeseries Example](https://apis.io/examples/fixer/fixer-gettimeseries-example/)
+
+#### Collections (11)
+
+Postman and Open Collection request collections.
+
+- [Fixer API](https://apis.io/collections/fixer/open-fixer/)
+- [Fixer Conversion API](https://apis.io/collections/fixer/open-fixer-conversion-api/)
+- [Fixer Conversion Fluctuation API](https://apis.io/collections/fixer/open-fixer-fluctuation-api/)
+- [Fixer Conversion Rates API](https://apis.io/collections/fixer/open-fixer-rates-api/)
+- [Fixer Conversion Symbols API](https://apis.io/collections/fixer/open-fixer-symbols-api/)
+- [Fixer Conversion Time Series API](https://apis.io/collections/fixer/open-fixer-time-series-api/)
+- [Fixer Conversion API](https://apis.io/collections/fixer/postman-fixer-conversion-api/)
+- [Fixer Conversion Fluctuation API](https://apis.io/collections/fixer/postman-fixer-fluctuation-api/)
+- [Fixer Conversion Rates API](https://apis.io/collections/fixer/postman-fixer-rates-api/)
+- [Fixer Conversion Symbols API](https://apis.io/collections/fixer/postman-fixer-symbols-api/)
+- [Fixer Conversion Time Series API](https://apis.io/collections/fixer/postman-fixer-time-series-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Fixer — jsonschema rules](https://apis.io/rules/fixer/fixer-jsonschema-spectral-rules/)
+- [Fixer API Rules](https://apis.io/rules/fixer/fixer-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Fixer Authentication](https://apis.io/security/fixer/fixer-authentication/)
+- [Fixer Domain Security](https://apis.io/security/fixer/fixer-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Fixer Plans Pricing](https://apis.io/plans/fixer/fixer-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Fixer Rate Limits](https://apis.io/rate-limits/fixer/fixer-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Fixer Finops](https://apis.io/finops/fixer/fixer-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://fixer.io)
 - [Documentation](https://docs.apilayer.com/fixer/docs/api-documentation)
-- [API Reference](https://apilayer.com/marketplace/fixer-api)
+- [API reference](https://apilayer.com/marketplace/fixer-api)
 - [Pricing](https://fixer.io/product)
-- [Sign Up](https://apilayer.com/signup)
-- [Login](https://apilayer.com/login)
-- [Terms of Service](https://fixer.io/terms)
-- [Privacy Policy](https://fixer.io/privacy)
 - [Support](https://fixer.io/contact)
 - [Blog](https://blog.apilayer.com/)
-- [GitHub Organization](https://github.com/apilayer)
-- [GitHub Repository](https://github.com/apilayer/fixer)
-- [Public APIs Listing](https://github.com/public-apis/public-apis)
-- [Spectral Rules](rules/fixer-rules.yml)
-- [Vocabulary](vocabulary/fixer-vocabulary.yml)
-- [Plans](plans/fixer-plans-pricing.yml)
-- [Rate Limits](rate-limits/fixer-rate-limits.yml)
-- [Fin Ops](finops/fixer-finops.yml)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [Solutions](undefined)
+- [Terms of service](https://fixer.io/terms)
+- [Privacy policy](https://fixer.io/privacy)
+- [GitHub](https://github.com/apilayer)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 47.9** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 67.1 |
+| Contract governance | 27.3 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 47.6 |
+| Access clarity | 46.1 |
+
+**Agent readiness 24.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/fixer/](https://apis.io/providers/fixer/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Fixer: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/fixer/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
